@@ -159,11 +159,12 @@ class ClienteController extends Controller
         ]);
         try {            
             $cliente = Cliente::findOrFail($request->id);
-            $cliente->plan= $request->plan;
+            $cliente->plan_id= $request->plan;
             $cliente->save();
             return redirect()->route('welcome');
         } catch (Exception $e) {
             echo($e);
+            printf($e);
             return redirect()->back();
         }
     }
