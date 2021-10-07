@@ -36,7 +36,7 @@ class PlanController extends Controller
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
-        return redirect()->route('dashboard');
+        return redirect()->route('welcome');
     } catch (Exception $e){
         echo($e);
         printf($e);
@@ -80,7 +80,7 @@ class PlanController extends Controller
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
-        return redirect()->route('dashboard');
+        return redirect()->route('welcome');
     }
 
 

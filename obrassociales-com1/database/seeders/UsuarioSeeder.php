@@ -29,7 +29,8 @@ class UsuarioSeeder extends Seeder
             'email' => 'empleado@empleado.com',
             'password' => bcrypt('empleado'),
             'role_id' => Role::EMPLEADO
-        ));   
+        ));  
+
     }
 }
 

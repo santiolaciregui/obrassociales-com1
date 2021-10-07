@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Cliente;
+use App\Models\User;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
 
 class ClienteSeeder extends Seeder
@@ -28,7 +30,16 @@ class ClienteSeeder extends Seeder
         $cliente->email = 'rodrigo@delaserna.com';
         $cliente->plan_id = '2';
         $cliente->password = 'rodrigo';
-        $cliente->role_id = '1';
-        $cliente->save();  
+        $cliente->role_id = Role::CLIENTE;
+        $cliente->save(); 
+        
+        
+        User::create(array(
+            'nombre' => 'Rodrigo',
+            'apellido' => 'De la Serna',
+            'email' => 'rodrigo@delaserna.com',
+            'password' => bcrypt('rodrigo'),
+            'role_id' => Role::CLIENTE
+        ));   
     }
 }

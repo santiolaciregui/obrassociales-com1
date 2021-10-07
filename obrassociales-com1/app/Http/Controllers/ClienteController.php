@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\Cliente;
 use App\Models\Plan;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -25,7 +26,21 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        
+        $request->validate([
+            'dni'=> 'required',
+            'nombre'=> 'required',
+            'apellido'=> 'required',
+            'sexo'=> 'required',
+            'fecha_nacimiento'=> 'required',
+            'domicilio'=> 'required',
+            'estado_civil'=> 'required',
+            'empresa'=> 'required',
+            'cuil'=> 'required',
+            'telefono'=> 'required',
+            'email'=> 'required',
+            'plan' => 'required',
+            'contraseña'=> 'required',            
+        ]);   
         try {        
             $cliente = new Cliente ();
             $cliente->dni= $request->dni;
@@ -40,10 +55,21 @@ class ClienteController extends Controller
             $cliente->telefono= $request->telefono;
             $cliente->plan_id= $request->plan;
             $cliente->email= $request->email;
-            $cliente->password=Hash::make($request->password);
+            $cliente->password=bcrypt($request->password);
             $cliente->role_id=Role::CLIENTE;
+
+
+            $usuario = new User();
+            $usuario->nombre= $request->nombre;
+            $usuario->apellido= $request->apellido;
+            $usuario->email= $request->email;
+            $usuario->password=bcrypt($request->password);
+            $usuario->role_id=Role::CLIENTE;
+
             $cliente->save();
-            return redirect()->route('dashboard');
+            $usuario->save();
+
+            return redirect()->route('welcome');
         } catch (Exception $e) {
             echo($e);
             printf($e);
@@ -120,7 +146,7 @@ class ClienteController extends Controller
                 $cliente->role_id=Role::CLIENTE;
                 $cliente->save();
             }
-            return redirect()->route('dashboard');
+            return redirect()->route('welcome');
         } catch (Exception $e) {
             echo($e);
             return redirect()->back();
@@ -135,7 +161,7 @@ class ClienteController extends Controller
             $cliente = Cliente::findOrFail($request->id);
             $cliente->plan= $request->plan;
             $cliente->save();
-            return redirect()->route('dashboard');
+            return redirect()->route('welcome');
         } catch (Exception $e) {
             echo($e);
             return redirect()->back();
