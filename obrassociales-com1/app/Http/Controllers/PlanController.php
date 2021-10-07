@@ -25,6 +25,15 @@ class PlanController extends Controller
     }
 
     public function store(Request $request){
+        $request->validate([
+            'nombre'=> 'required',
+            'tipo'=> 'required',
+            'costo'=> 'required',
+            'prestaciones'=> 'required',
+            'edad_desde'=> 'required',
+            'edad_hasta'=> 'required',
+            'beneficiario'=> 'required',
+        ]);
        try{
         $plan = new Plan ();
         $plan->nombre=$request->nombre;
@@ -67,16 +76,16 @@ class PlanController extends Controller
             'tipo'=> 'required',
             'costo'=> 'required',
             'prestaciones'=> 'required',
-            'edad'=> 'required',
+            'edad_desde'=> 'required',
+            'edad_hasta'=> 'required',
             'beneficiario'=> 'required',
         ]);
         $plan = Plan::findOrFail($request->id);
         $plan->nombre=$request->nombre;
         $plan->tipo=$request->tipo;
         $plan->costo=$request->costo;
-        $plan->prestaciones=$request->prestaciones;
-        $plan->edad=$request->edad;
-        $plan->beneficiario=$request->beneficiario;
+        $plan->edad_desde=$request->edad_desde;
+        $plan->edad_hasta=$request->edad_hasta;
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);

@@ -25,7 +25,7 @@
   <div>
     @foreach($prestaciones as $prestacion)
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="{{$prestacion['id']}}">
+      <input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="prestaciones[]" value="{{$prestacion['id']}}">
       <label class="form-check-label" for="inlineCheckbox1">
         {{$prestacion['nombre']}}
       </label>
