@@ -33,7 +33,7 @@ table{
                 <td>{{$plan['tipo']}}</td>
                 <td>{{$plan['costo']}}</td>
                 <td>
-                    <a href="{{route('plan.update', ['id' => $plan->id])}}" class="btn btn-secondary">Editar</a>
+                    <a href="{{route('plan.update', ['id' => $plan->id])}}" class="btn btn-light">Editar</a>
                 </td>
             </tr>
             @endforeach

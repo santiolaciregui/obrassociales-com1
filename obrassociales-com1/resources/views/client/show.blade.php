@@ -33,8 +33,8 @@ table{
                 <td>{{$cliente['apellido']}}</td>
                 <td>{{$cliente['dni']}}</td>
                 <td>
-                    <a href="{{route('client.update', ['id' => $cliente->id])}}" class="btn btn-secondary">Editar Datos</a>
-                    <a href="{{route('client.update_plan', ['id' => $cliente->id])}}" class="btn btn-primary">Cambiar Plan</a>
+                    <a href="{{route('client.update', ['id' => $cliente->id])}}" class="btn btn-light">Editar Datos</a>
+                    <a href="{{route('client.update_plan', ['id' => $cliente->id])}}" class="btn btn-light">Cambiar Plan</a>
                 </td>
             </tr>
             @endforeach

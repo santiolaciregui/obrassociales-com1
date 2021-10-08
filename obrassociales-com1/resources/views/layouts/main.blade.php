@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <div class="container">
+  <div class="container" style="margin-top: 60px; margin-bottom:60px">
   @yield('contenedor')
   </div>
 </body>

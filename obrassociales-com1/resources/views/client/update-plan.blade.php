@@ -40,7 +40,7 @@
   </div>
   <hr>
   <td>
-    <button type="submit" class="btn btn-primary">Finalizar modificacion de datos</button>
+    <button type="submit" class="btn btn-dark">Finalizar modificacion de datos</button>
   </td>
 </form>
 
