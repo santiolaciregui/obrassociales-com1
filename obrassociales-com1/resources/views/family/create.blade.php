@@ -85,8 +85,8 @@
   <hr>
   <hr>
   <td>
-    <button class="btn btn-primary">Agregar otro familiar</button>
-    <button type="submit" class="btn btn-primary">Volver a la carga de clientes</button>
+    <button class="btn btn-dark">Agregar otro familiar</button>
+    <button type="submit" class="btn btn-dark">Volver a la carga de clientes</button>
   </td>
 </form>
 

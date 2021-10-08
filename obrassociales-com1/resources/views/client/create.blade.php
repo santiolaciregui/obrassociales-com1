@@ -131,8 +131,8 @@
   </div>
   <hr>
   <td>
-    <button class="btn btn-primary">Agregar familiar</button>
-    <button type="submit" class="btn btn-primary">Finalizar carga de cliente</button>
+    <button class="btn btn-dark">Agregar familiar</button>
+    <button type="submit" class="btn btn-dark">Finalizar carga de cliente</button>
   </td>
 </form>
 

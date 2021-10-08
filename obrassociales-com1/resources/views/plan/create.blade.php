@@ -55,7 +55,7 @@
   </div>
   <hr>
   <td>
-    <button type="submit" class="btn btn-primary">Agregar</button>
+    <button type="submit" class="btn btn-dark">Agregar</button>
   </td>
 </form>
 

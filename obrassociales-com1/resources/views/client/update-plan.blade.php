@@ -4,6 +4,7 @@
 <html>
 <h2>Cambiar plan asociado al usuario</h2>
 <form action="{{route('client.patch_plan', ['id' => $cliente->id] )}}" method="POST">
+  @method('PATCH')
   @csrf
   <div>
     <label>DNI</label>
@@ -39,7 +40,7 @@
   </div>
   <hr>
   <td>
-    <button type="submit" class="btn btn-primary">Finalizar modificacion de datos</button>
+    <button type="submit" class="btn btn-dark">Finalizar modificacion de datos</button>
   </td>
 </form>
 
