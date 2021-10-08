@@ -39,9 +39,9 @@ class ClienteController extends Controller
             'telefono'=> 'required',
             'email'=> 'required',
             'plan' => 'required',
-            'contraseña'=> 'required',            
-        ]);   
-        try {        
+            'contraseña'=> 'required',
+        ]);
+        try {
             $cliente = new Cliente ();
             $cliente->dni= $request->dni;
             $cliente->nombre= $request->nombre;
@@ -55,7 +55,7 @@ class ClienteController extends Controller
             $cliente->telefono= $request->telefono;
             $cliente->plan_id= $request->plan;
             $cliente->email= $request->email;
-            $cliente->password=bcrypt($request->password);
+            $cliente->password=bcrypt($request->get('contraseña'));
             $cliente->role_id=Role::CLIENTE;
 
 
@@ -63,7 +63,7 @@ class ClienteController extends Controller
             $usuario->nombre= $request->nombre;
             $usuario->apellido= $request->apellido;
             $usuario->email= $request->email;
-            $usuario->password=bcrypt($request->password);
+            $usuario->password=bcrypt($request->get('contraseña'));
             $usuario->role_id=Role::CLIENTE;
 
             $cliente->save();
@@ -83,7 +83,7 @@ class ClienteController extends Controller
         return view('client.update')
         ->with('cliente', $cliente);
     }
-    
+
     public function update_plan($id){
         $cliente = Cliente::findOrFail($id);
         $planes = Plan::all();
@@ -109,9 +109,9 @@ class ClienteController extends Controller
             'email'=> 'required',
             'contraseña'=> 'required',
             'contraseña_nueva'=> 'required',
-            
+
         ]);
-        try {            
+        try {
             $cliente = Cliente::findOrFail($request->id);
             $passwordViejaHash=Hash::make($request->contraseña);
             $passwordNuevaHash=Hash::make($request->contraseña_nueva);
@@ -157,7 +157,7 @@ class ClienteController extends Controller
         $request->validate([
             'plan'=> 'required'
         ]);
-        try {            
+        try {
             $cliente = Cliente::findOrFail($request->id);
             $cliente->plan= $request->plan;
             $cliente->save();
