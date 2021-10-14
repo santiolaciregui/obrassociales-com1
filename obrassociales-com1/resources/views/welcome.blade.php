@@ -10,6 +10,9 @@
     <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Alta cliente</a>
     <a class="btn btn-light btn-lg" type="button" href="/client-management/">Modificar cliente</a>
     @endif
+    @if(Auth::user()->id === Auth::user()->id_familiar)
+    <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Generar cupon de pago</a>
+    @endif
 </div>
 
 </html>
