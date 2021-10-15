@@ -2,8 +2,8 @@
 @extends('layouts.main')
 @section('contenedor')
 <html>
-<h2>Agregar familiar</h2>
-<form action="{{route('client.store')}}" method="POST">
+<h2>Alta de un nuevo familiar del usuario #{{$id_titular}}</h2>
+<form action="{{route('familiar.store')}}" method="POST">
   @csrf
   <div>
     <label>DNI</label>
@@ -12,7 +12,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Nombre</label>
     <input type="text" class="form-control" name="nombre" placeholder="Martin">
@@ -20,7 +19,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Apellido</label>
     <input type="text" class="form-control" name="apellido" placeholder="Perez">
@@ -28,7 +26,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Sexo</label>
     <div class="form-group">
@@ -40,10 +37,9 @@
       <label for="btnradio1">Otro</label>
     </div>
     @error('sexo')
-      <small>*{{$message}}</small>
-      @enderror
+    <small>*{{$message}}</small>
+    @enderror
   </div>
-  <hr>
   <div>
     <label>Fecha de nacimiento</label>
     <div class="input-group date" name="fecha_nacimiento" data-provide="datepicker">
@@ -53,10 +49,9 @@
       </div>
     </div>
     @error('fecha_nacimiento')
-      <small>*{{$message}}</small>
-      @enderror
+    <small>*{{$message}}</small>
+    @enderror
   </div>
-  <hr>
   <div>
     <label>Domicilio</label>
     <input type="text" class="form-control" name="domicilio" placeholder="Avenida Alem 7534">
@@ -64,7 +59,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Estado civil</label>
     <div class="form-group">
@@ -77,16 +71,40 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
-    <label>ID Cliente</label>
-    <input type="number" class="form-control" name="cliente"  disabled placeholder="aca se tiene que autocompletar el id del cliente">
+    <div class="form-group">
+      <label>Seleccionar Plan</label>
+      <select class="form-control" name="plan">
+        @foreach($planes as $plan)
+        <option value="{{$plan['id']}}">{{$plan['nombre']}}</option>
+        @endforeach
+      </select>
+      @error('plan')
+      <small>*{{$message}}</small>
+      @enderror
+    </div>
+    <div>
+      <input type="hidden" class="form-control" name="id_titular" value="{{$id_titular}}">
+    </div>
+    <hr>
+    <h4>Datos de acceso</h4>
+    <label>Correo electrónico</label>
+    <input type="text" class="form-control" name="email" placeholder="example@pss.com">
+    @error('email')
+    <small>*{{$message}}</small>
+    @enderror
   </div>
-  <hr>
-  <hr>
+  <div>
+    <label for="inputPassword5" class="form-label">Contraseña</label>
+    <input type="password" id="inputPassword5" class="form-control" name="contraseña" aria-describedby="passwordHelpBlock">
+    @error('contraseña')
+    <small>*{{$message}}</small>
+    @enderror
+  </div>
+  <br>
+  <br>
   <td>
-    <button class="btn btn-dark">Agregar otro familiar</button>
-    <button type="submit" class="btn btn-dark">Volver a la carga de clientes</button>
+    <button type="submit" class="btn btn-dark">Finalizar y crear</button>
   </td>
 </form>
 

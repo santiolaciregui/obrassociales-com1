@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,5 +39,10 @@ Route::middleware(['empleado'])->group(function () {
     Route::patch('/client-patch-plan', [ClienteController::class, 'patch_plan'])->name('client.patch_plan');
     Route::get('/client-management', [ClienteController::class, 'getAll'])->name('client.show');
 });
+
+Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
+Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
+Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
+Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
 
 require __DIR__ . '/auth.php';

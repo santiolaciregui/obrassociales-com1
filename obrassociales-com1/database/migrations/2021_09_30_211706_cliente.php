@@ -22,19 +22,18 @@ class Cliente extends Migration
             $table->date('fecha_nacimiento');
             $table->string('domicilio');
             $table->string('estado_civil');
-            $table->string('empresa');
-            $table->bigInteger('cuil');
-            $table->bigInteger('telefono');
-            $table->string('email')->unique();
+            $table->string('empresa')->nullable();
+            $table->bigInteger('cuil')->nullable();
+            $table->bigInteger('telefono')->nullable();
+            $table->string('email')->unique()->nullable();
             $table->integer('plan_id');
+            $table->integer('id_titular');
             $table->string('password');
             $table->rememberToken()->nullable();
-            $table->integer('familiar')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->integer('role_id');
             $table->foreign('role_id')->references('id')->on('roles');
             $table->foreign('plan_id')->references('id')->on('plan');
-            $table->foreign('familiar')->references('id')->on('familiares');
             $table->timestamps();
         });
     }
