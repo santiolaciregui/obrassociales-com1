@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class ClienteController extends Controller
 {
     public function getAll(){
-        $cliente = Cliente::all();
+        $cliente = Cliente::whereColumn('id_titular','=','id')->get();
         return view('client.show')->with('clientes', $cliente);
     }
 
@@ -57,7 +57,10 @@ class ClienteController extends Controller
             $cliente->email= $request->email;
             $cliente->password=bcrypt($request->get('contraseña'));
             $cliente->role_id=Role::CLIENTE;
-
+            $cliente->id_titular= '99';
+            $cliente->save();
+            $cliente->id_titular= $cliente->id;
+            $cliente->save();
 
             $usuario = new User();
             $usuario->nombre= $request->nombre;
@@ -65,9 +68,8 @@ class ClienteController extends Controller
             $usuario->email= $request->email;
             $usuario->password=bcrypt($request->get('contraseña'));
             $usuario->role_id=Role::CLIENTE;
-
-            $cliente->save();
             $usuario->save();
+            
 
             return redirect()->route('welcome');
         } catch (Exception $e) {

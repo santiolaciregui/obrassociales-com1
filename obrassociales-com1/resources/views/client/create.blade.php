@@ -12,7 +12,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label for="inputPassword5" class="form-label">Contraseña</label>
     <input type="password" id="inputPassword5" class="form-control" name="contraseña" aria-describedby="passwordHelpBlock">
@@ -20,7 +19,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Nombre</label>
     <input type="text" class="form-control" name="nombre" placeholder="Martin">
@@ -28,7 +26,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Apellido</label>
     <input type="text" class="form-control" name="apellido" placeholder="Perez">
@@ -36,7 +33,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Sexo</label>
     <div class="form-group">
@@ -48,10 +44,9 @@
       <label for="btnradio1">Otro</label>
     </div>
     @error('sexo')
-      <small>*{{$message}}</small>
-      @enderror
+    <small>*{{$message}}</small>
+    @enderror
   </div>
-  <hr>
   <div>
     <label>Fecha de nacimiento</label>
     <div class="input-group date" name="fecha_nacimiento" data-provide="datepicker">
@@ -61,10 +56,9 @@
       </div>
     </div>
     @error('fecha_nacimiento')
-      <small>*{{$message}}</small>
-      @enderror
+    <small>*{{$message}}</small>
+    @enderror
   </div>
-  <hr>
   <div>
     <label>Domicilio</label>
     <input type="text" class="form-control" name="domicilio" placeholder="Avenida Alem 7534">
@@ -72,7 +66,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Estado civil</label>
     <div class="form-group">
@@ -85,7 +78,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Empresa</label>
     <input type="text" class="form-control" name="empresa" placeholder="Fragma">
@@ -93,7 +85,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>CUIL/CUIT</label>
     <input type="text" class="form-control" name="cuil" placeholder="20432101247">
@@ -101,7 +92,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Telefono</label>
     <input type="text" class="form-control" name="telefono" placeholder="2914321012">
@@ -109,7 +99,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div>
     <label>Correo electrónico</label>
     <input type="text" class="form-control" name="email" placeholder="example@pss.com">
@@ -117,7 +106,6 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
   <div class="form-group">
     <label>Seleccionar Plan</label>
     <select class="form-control" name="plan">
@@ -129,13 +117,11 @@
     <small>*{{$message}}</small>
     @enderror
   </div>
-  <hr>
+  <br>
   <td>
-    <button class="btn btn-dark">Agregar familiar</button>
     <button type="submit" class="btn btn-dark">Finalizar carga de cliente</button>
   </td>
 </form>
 
 </html>
 @endsection
-

@@ -33,17 +33,13 @@ class Cliente extends Authenticatable
         }
         return false;
     }
-    
-    public function familiar(){//cliente->Familiar
-        return $this->hasMany('App\Models\Familiar'::class);
-    }
 
     public function plan(){//cliente->plan
         return $this->belongsTo('App\Models\Plan'::class);
     }
 
 
-    protected $fillable =['id','dni','nombre','apellido','sexo','fecha_nacimiento','domicilio','estado_civil','empresa','cuil','telefono','email','familiares'];
+    protected $fillable =['id','dni','nombre','apellido','sexo','fecha_nacimiento','domicilio','estado_civil','empresa','cuil','telefono','email','id_titular'];
 
 
     /**
