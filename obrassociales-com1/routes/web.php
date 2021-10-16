@@ -4,6 +4,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CuponDePagoController;
+use App\Http\Controllers\ReintegroController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,5 +50,8 @@ Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [Famil
 Route::get('/cupon/create', [CuponDePagoController::class, 'create'])->name('cupon.create');
 Route::post('/cupon-store', [CuponDePagoController::class, 'store'])->name('cupon.store');
 Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPDF'])->name('cupon.download');
+
+Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
+Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
 
 require __DIR__ . '/auth.php';
