@@ -3,6 +3,7 @@
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\PlanController;
+use App\Http\Controllers\CuponDePagoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,5 +45,9 @@ Route::get('/client-management/{id_titular}/family/add', [FamilyController::clas
 Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
 Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
 Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
+
+Route::get('/cupon/create', [CuponDePagoController::class, 'create'])->name('cupon.create');
+Route::post('/cupon-store', [CuponDePagoController::class, 'store'])->name('cupon.store');
+Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPDF'])->name('cupon.download');
 
 require __DIR__ . '/auth.php';
