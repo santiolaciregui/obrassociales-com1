@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\CuponDePago;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Support\Facades\Auth;
@@ -42,22 +43,35 @@ class CuponDePagoController extends Controller
         return redirect('cupon-download/'.$request->get('formaDePago'));
     }
 
-    function cost($plan) {
-        return 1000;
+    function cost($plan, $forma) {
+        $cost = $plan->costo;
+
+        if ($forma == 2) {
+            $cost = $cost * 6;
+        }
+
+        if ($forma == 3) {
+            $cost = $cost * 12;
+        }
+
+        return $cost;
     }
 
-    function downloadPDF() {
-        $client = Cliente::where('email', 'rodrigo@delaserna.com')->get()[0];
+    function downloadPDF(Request $request, $formaDePago) {
+        $client = Cliente::where('email', Auth::user()->email)->get()[0];
         $related = Cliente::where('id_titular', $client->id)->get();
 
         $costs = [];
+        $total = 0;
 
         foreach ($related as $f) {
-            $cost = $this->cost($f->plan_id);
+            $plan = Plan::whereRaw('id = '. $f->plan_id)->get()[0];
+            $cost = $this->cost($plan, $formaDePago);
             $costs[$f->nombre. " " .$f->apellido] = $cost;
+            $total = $total + $cost;
         }
 
-        $pdf = PDF::loadView('pdfview', ['costos' => $costs, 'codigo' => rand(100000, 1000000000)]);
+        $pdf = PDF::loadView('pdfview', ['costos' => $costs, 'total' => $total, 'codigo' => rand(100000, 1000000000)]);
         return $pdf->download('cupon de cobro.pdf');
     }
 
