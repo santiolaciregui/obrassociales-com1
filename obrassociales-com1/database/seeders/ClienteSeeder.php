@@ -27,25 +27,25 @@ class ClienteSeeder extends Seeder
         $cliente->empresa = 'Fragma';
         $cliente->cuil = '20422957767';
         $cliente->telefono = '2914706799';
-        $cliente->email = 'rodrigo@delaserna.com';
+        $cliente->email = 'cliente@cliente.com';
         $cliente->plan_id = '2';
         $cliente->password = 'rodrigo';
-        
-        $cliente->id_titular = '99'; 
+
+        $cliente->id_titular = '99';
         $cliente->role_id = Role::CLIENTE;
-        $cliente->save(); 
-        $cliente->id_titular = $cliente->id; 
-        
-        $cliente->save(); 
-        
-        
+        $cliente->save();
+        $cliente->id_titular = $cliente->id;
+
+        $cliente->save();
+
+
         User::create(array(
             'nombre' => 'Rodrigo',
             'apellido' => 'De la Serna',
             'email' => 'cliente@cliente.com',
             'password' => bcrypt('cliente'),
             'role_id' => Role::CLIENTE
-        ));   
+        ));
 
         $cliente1 = new Cliente();
         $cliente1->nombre = 'Familiar De';
@@ -58,11 +58,11 @@ class ClienteSeeder extends Seeder
         $cliente1->email = 'familiar@familiar.com';
         $cliente1->plan_id = '1';
         $cliente1->password = 'familiar';
-        $cliente1->id_titular = $cliente->id; 
+        $cliente1->id_titular = $cliente->id;
         $cliente1->role_id = Role::CLIENTE;
-        $cliente1->save(); 
-        
-        
+        $cliente1->save();
+
+
         User::create(array(
             'nombre' => 'Familiar De',
             'apellido' => 'Rodrigo',
@@ -85,20 +85,20 @@ class ClienteSeeder extends Seeder
         $cliente2->email = 'lionel@messi.com';
         $cliente2->plan_id = '3';
         $cliente2->password = 'lionel';
-        $cliente2->id_titular = '99'; 
+        $cliente2->id_titular = '99';
         $cliente2->role_id = Role::CLIENTE;
-        $cliente2->save(); 
-        $cliente2->id_titular = $cliente2->id; 
-        $cliente2->save(); 
-        
-        
+        $cliente2->save();
+        $cliente2->id_titular = $cliente2->id;
+        $cliente2->save();
+
+
         User::create(array(
             'nombre' => 'Lionel Andres',
             'apellido' => 'Messi',
             'email' => 'lionel@messi.com',
             'password' => bcrypt('lionel'),
             'role_id' => Role::CLIENTE
-        ));   
+        ));
 
         $cliente3 = new Cliente();
         $cliente3->nombre = 'Mateo';
@@ -111,11 +111,11 @@ class ClienteSeeder extends Seeder
         $cliente3->email = 'mateo@messi.com';
         $cliente3->plan_id = '1';
         $cliente3->password = 'mateo';
-        $cliente3->id_titular = $cliente2->id; 
+        $cliente3->id_titular = $cliente2->id;
         $cliente3->role_id = Role::CLIENTE;
-        $cliente3->save(); 
-        
-        
+        $cliente3->save();
+
+
         User::create(array(
             'nombre' => 'Mateo',
             'apellido' => 'Messi',
@@ -126,5 +126,5 @@ class ClienteSeeder extends Seeder
 
     }
 
-    
+
 }

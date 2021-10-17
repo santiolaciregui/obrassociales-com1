@@ -28,7 +28,7 @@ class ReintegroController extends Controller
      */
     public function create()
     {
-        $client = Cliente::where('email', 'rodrigo@delaserna.com')->get()[0];
+        $client = Cliente::where('email', Auth::user()->email)->get()[0];
         $plan = Plan::whereRaw('id ='. $client->plan_id)->get()[0];
         $today = Carbon::now();
         return view('reintegro.create')->with('client', $client)->with('plan', $plan)->with('today', $today->toDateString());
@@ -42,7 +42,17 @@ class ReintegroController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $cliente = Cliente::where('email', Auth::user()->email)->get()[0];
+        $reintegro = new Reintegro();
+        $reintegro->id_cliente = $cliente->id;
+        $reintegro->fecha_solicitud = date(Carbon::now()->format('Y-m-d'));
+        $reintegro->comprobante_factura = $request->comprobante;
+        $reintegro->fecha_emision = date(Carbon::parse($request->fecha_emision)->format('Y-m-d'));
+        $reintegro->nombre_profesional = $request->profesional;
+        $reintegro->importe_facturado = $request->importe;
+        $reintegro->save();
+
+        return redirect('/reintegro/create');
     }
 
     /**

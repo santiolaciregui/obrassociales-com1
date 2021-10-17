@@ -13,7 +13,7 @@ class Reintegro extends Migration
      */
     public function up()
     {
-        Schema::create('reintegro', function (Blueprint $table) {
+        Schema::create('reintegros', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cliente');
             $table->date('fecha_solicitud');

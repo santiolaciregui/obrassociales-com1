@@ -75,8 +75,8 @@
         </div>
         <div>
             <label>Nombre profesional</label>
-            <input type="text" class="form-control" name="profesonal" placeholder="Gerardo Rodriguez">
-            @error('profesonal')
+            <input type="text" class="form-control" name="profesional" placeholder="Gerardo Rodriguez">
+            @error('profesional')
             <small>*{{$message}}</small>
             @enderror
         </div>
