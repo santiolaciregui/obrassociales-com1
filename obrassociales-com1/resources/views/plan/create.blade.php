@@ -4,26 +4,23 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
   <style type="text/css">
     .dropdown-toggle {
       height: 40px;
-     /* min-inline-size: -webkit-fill-available; */
+      /* min-inline-size: -webkit-fill-available; */
     }
+
     .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
-    width: max-content;
-    inline-size: -webkit-fill-available;
-}
+      width: max-content;
+      inline-size: -webkit-fill-available;
+    }
   </style>
 </head>
 
 <body>
-
-
   <h2>Alta de Plan</h2>
   <form action="{{route('plan.store')}}" method="POST">
     @csrf
@@ -46,7 +43,7 @@
     <div>
       <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]">
         @foreach($prestaciones as $prestacion)
-          <option value="{{$prestacion['id']}}">{{$prestacion['nombre']}}</option>
+        <option value="{{$prestacion['id']}}">{{$prestacion['nombre']}}</option>
         @endforeach
       </select>
     </div>
