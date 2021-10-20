@@ -90,5 +90,9 @@ class PlanController extends Controller
         return redirect()->route('welcome');
     }
 
+    public function showBenefits(){
+        $prestaciones = Prestacion::all();
+        return view('plan.show-benefits')->with('prestaciones', $prestaciones);
+    }
 
 }

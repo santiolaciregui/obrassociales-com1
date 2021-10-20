@@ -54,4 +54,5 @@ Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPD
 Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
 Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
 
+Route::get('/benefits', [PlanController::class, 'showBenefits'])->name('benefits.show');
 require __DIR__ . '/auth.php';
