@@ -5,6 +5,7 @@
     @if(Auth::user()->hasRole('administrador'))
     <a class="btn btn-light btn-lg" type="button" href="/plan-management/create">Alta plan</a>
     <a class="btn btn-light btn-lg" type="button" href="/plan-management/">Modificar plan</a>
+    <a class="btn btn-light btn-lg" type="button" href="/benefits">Administrar prestaciones</a>
     @endif
     @if(Auth::user()->hasRole('empleado'))
     <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Alta cliente</a>

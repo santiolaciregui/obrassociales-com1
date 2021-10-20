@@ -57,4 +57,7 @@ Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('re
 Route::get('/benefits', [PlanController::class, 'showBenefits'])->name('benefits.show');
 Route::get('/benefits/add', [PlanController::class, 'createBenefit'])->name('benefit.create');
 Route::post('/benefit-store', [PlanController::class, 'storeBenefit'])->name('benefit.store');
+Route::get('/benefits/delete/{id_benefit}', [PlanController::class, 'deleteBenefit'])->name('benefit.delete');
+
+
 require __DIR__ . '/auth.php';

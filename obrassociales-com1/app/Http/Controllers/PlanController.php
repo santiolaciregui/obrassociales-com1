@@ -115,4 +115,13 @@ class PlanController extends Controller
             printf($e);
         }
     }
+
+    public function deleteBenefit($id_benefit)
+    {
+        $benefit = Prestacion::findOrFail($id_benefit);
+        $benefit->destroy($benefit->id);
+        $benefit->save();
+
+        return redirect()->route('benefits.show');
+    }
 }
