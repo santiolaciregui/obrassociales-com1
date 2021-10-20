@@ -5,6 +5,7 @@ use App\Http\Controllers\FamilyController;
 use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CuponDePagoController;
 use App\Http\Controllers\ReintegroController;
+use App\Http\Controllers\BenefitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,10 +55,10 @@ Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPD
 Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
 Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
 
-Route::get('/benefits', [PlanController::class, 'showBenefits'])->name('benefits.show');
-Route::get('/benefits/add', [PlanController::class, 'createBenefit'])->name('benefit.create');
-Route::post('/benefit-store', [PlanController::class, 'storeBenefit'])->name('benefit.store');
-Route::get('/benefits/delete/{id_benefit}', [PlanController::class, 'deleteBenefit'])->name('benefit.delete');
+Route::get('/benefits', [BenefitController::class, 'show'])->name('benefits.show');
+Route::get('/benefits/add', [BenefitController::class, 'create'])->name('benefit.create');
+Route::post('/benefit-store', [BenefitController::class, 'store'])->name('benefit.store');
+Route::get('/benefits/delete/{id_benefit}', [BenefitController::class, 'delete'])->name('benefit.delete');
 
 
 require __DIR__ . '/auth.php';

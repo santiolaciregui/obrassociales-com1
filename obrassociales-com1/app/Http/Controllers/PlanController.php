@@ -89,39 +89,4 @@ class PlanController extends Controller
         $plan->prestacion()->sync($prestacion);
         return redirect()->route('welcome');
     }
-
-    public function showBenefits(){
-        $prestaciones = Prestacion::all();
-        return view('plan.show-benefits')->with('prestaciones', $prestaciones);
-    }
-
-    public function createBenefit(){
-        return view('plan.create-benefit');
-    }
-
-    public function storeBenefit(Request $request)
-    {
-        $request->validate([
-            'nombre'=> 'required'
-
-        ]);
-        try {
-            $benefit = new Prestacion ();
-            $benefit->nombre= $request->nombre;
-            $benefit->save();
-            return redirect()->route('benefits.show');
-        } catch (Exception $e) {
-            echo($e);
-            printf($e);
-        }
-    }
-
-    public function deleteBenefit($id_benefit)
-    {
-        $benefit = Prestacion::findOrFail($id_benefit);
-        $benefit->destroy($benefit->id);
-        $benefit->save();
-
-        return redirect()->route('benefits.show');
-    }
 }
