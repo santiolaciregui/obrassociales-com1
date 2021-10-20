@@ -11,11 +11,11 @@
     <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Alta cliente</a>
     <a class="btn btn-light btn-lg" type="button" href="/client-management/">Modificar cliente</a>
     @endif
-    
+
     @if(Auth::user()->hasRole('cliente'))
     <a class="btn btn-light btn-lg" type="button" href="/cupon/create">Generar cupon de pago</a>
     <a class="btn btn-light btn-lg" type="button" href="/reintegro/create">Solicitar aprobación de reintegro</a>
-    <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Solicitar aprobación de prestación</a>
+    <a class="btn btn-light btn-lg" type="button" href="/prestacion/create">Solicitar aprobación de prestación</a>
     @endif
 </div>
 

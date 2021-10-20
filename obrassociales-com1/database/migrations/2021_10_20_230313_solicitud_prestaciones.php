@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Reintegro extends Migration
+class SolicitudPrestaciones extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class Reintegro extends Migration
      */
     public function up()
     {
-        Schema::create('reintegros', function (Blueprint $table) {
+        Schema::create('solicitud_prestaciones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cliente');
-            $table->date('fecha_solicitud');
-            $table->bigInteger('comprobante_factura');
-            $table->date('fecha_emision');
-            $table->string('nombre_profesional');
-            $table->integer('importe_facturado');
+            $table->text('image');
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class Reintegro extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('reintegros');
+        //
     }
 }

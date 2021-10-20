@@ -6,6 +6,7 @@ use App\Http\Controllers\PlanController;
 use App\Http\Controllers\CuponDePagoController;
 use App\Http\Controllers\ReintegroController;
 use App\Http\Controllers\BenefitController;
+use App\Http\Controllers\PrestacionController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,6 +55,9 @@ Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPD
 
 Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
 Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
+
+Route::get('/prestacion/create', [PrestacionController::class, 'create'])->name('prestacion.create');
+Route::post('/prestacion-store', [PrestacionController::class, 'store'])->name('prestacion.store');
 
 Route::get('/benefits', [BenefitController::class, 'show'])->name('benefits.show');
 Route::get('/benefits/add', [BenefitController::class, 'create'])->name('benefit.create');
