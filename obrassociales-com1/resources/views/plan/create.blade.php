@@ -26,7 +26,7 @@
     @csrf
     <label>Nombre</label>
     <input type="text" class="form-control" name="nombre" placeholder="Plan A/Plan B/Plan C">
-    <hr>
+    <br>
     <div class="form-group">
       <label>Tipo</label>
       <select class="form-control" name="tipo">
@@ -35,10 +35,9 @@
         <option value="C">C</option>
       </select>
     </div>
-    <hr>
     <label>Costo</label>
     <input type="number" class="form-control" name="costo" placeholder="1200">
-    <hr>
+    <br>
     <label>Prestaciones</label>
     <div>
       <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]">
@@ -47,7 +46,7 @@
         @endforeach
       </select>
     </div>
-    <hr>
+    <br>
     <div>
       <label>Edad</label>
       <div>
@@ -57,7 +56,7 @@
         <input type="text" class="form-control" name="edad_hasta" placeholder="50">
       </div>
     </div>
-    <hr>
+    <br>
     <div>
       <label>Beneficiario</label>
       <div class="form-group">
@@ -69,7 +68,7 @@
         <label for="btnradio1">Familia</label>
       </div>
     </div>
-    <hr>
+    <br>
     <td>
       <button type="submit" class="btn btn-dark">Agregar</button>
     </td>
