@@ -16,8 +16,8 @@ class PlanPrestacion extends Migration
         Schema::create('plan_prestacion', function (Blueprint $table) {
             $table->integer('plan_id');
             $table->integer('prestacion_id');
-            $table->foreign('plan_id')->references('id')->on('plan');
-            $table->foreign('prestacion_id')->references('id')->on('prestacion');            
+            $table->foreign('plan_id')->references('id')->on('plan')->onDelete('cascade');  
+            $table->foreign('prestacion_id')->references('id')->on('prestacion')->onDelete('cascade');            
         });
     }
 

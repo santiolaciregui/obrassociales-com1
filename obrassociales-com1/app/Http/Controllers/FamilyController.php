@@ -47,6 +47,7 @@ class FamilyController extends Controller
             $familiar->id_titular= $request->id_titular;
             $familiar->password=bcrypt($request->get('contraseña'));
             $familiar->role_id=Role::CLIENTE;
+            $familiar->save();
 
             $usuario = new User();
             $usuario->nombre= $request->nombre;
@@ -54,9 +55,7 @@ class FamilyController extends Controller
             $usuario->email= $request->email;
             $usuario->password=bcrypt($request->get('contraseña'));
             $usuario->role_id=Role::CLIENTE;
-
-            $familiar->save();
-            $familiar->save();
+            $usuario->save();
 
             return redirect()->route('welcome');
         } catch (Exception $e) {

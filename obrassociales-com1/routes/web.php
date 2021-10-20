@@ -60,5 +60,4 @@ Route::get('/benefits/add', [BenefitController::class, 'create'])->name('benefit
 Route::post('/benefit-store', [BenefitController::class, 'store'])->name('benefit.store');
 Route::get('/benefits/delete/{id_benefit}', [BenefitController::class, 'delete'])->name('benefit.delete');
 
-
 require __DIR__ . '/auth.php';
