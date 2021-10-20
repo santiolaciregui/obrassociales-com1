@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Database\Factories\ClienteFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +18,5 @@ class DatabaseSeeder extends Seeder
         $this->call(PlanesSeeder::class);
         $this->call(PrestacionesSeeder::class);
         $this->call(ClienteSeeder::class);
-        //$this->call(ClienteFactory::class::factory(10)->create());
     }
 }
