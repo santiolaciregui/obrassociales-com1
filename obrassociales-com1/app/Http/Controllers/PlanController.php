@@ -95,4 +95,24 @@ class PlanController extends Controller
         return view('plan.show-benefits')->with('prestaciones', $prestaciones);
     }
 
+    public function createBenefit(){
+        return view('plan.create-benefit');
+    }
+
+    public function storeBenefit(Request $request)
+    {
+        $request->validate([
+            'nombre'=> 'required'
+
+        ]);
+        try {
+            $benefit = new Prestacion ();
+            $benefit->nombre= $request->nombre;
+            $benefit->save();
+            return redirect()->route('benefits.show');
+        } catch (Exception $e) {
+            echo($e);
+            printf($e);
+        }
+    }
 }

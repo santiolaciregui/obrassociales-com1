@@ -55,4 +55,6 @@ Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('r
 Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
 
 Route::get('/benefits', [PlanController::class, 'showBenefits'])->name('benefits.show');
+Route::get('/benefits/add', [PlanController::class, 'createBenefit'])->name('benefit.create');
+Route::post('/benefit-store', [PlanController::class, 'storeBenefit'])->name('benefit.store');
 require __DIR__ . '/auth.php';
