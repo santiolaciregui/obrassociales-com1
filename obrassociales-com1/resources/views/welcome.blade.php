@@ -12,8 +12,13 @@
     <a class="btn btn-light btn-lg" type="button" href="/client-management/">Modificar cliente</a>
     @endif
 
-    @if(Auth::user()->hasRole('cliente'))
+    @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
+    @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id === App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
     <a class="btn btn-light btn-lg" type="button" href="/cupon/create">Generar cupon de pago</a>
+    @endif
+    @endif
+
+    @if(Auth::user()->hasRole('cliente'))
     <a class="btn btn-light btn-lg" type="button" href="/reintegro/create">Solicitar aprobación de reintegro</a>
     <a class="btn btn-light btn-lg" type="button" href="/prestacion/create">Solicitar aprobación de prestación</a>
     @endif
