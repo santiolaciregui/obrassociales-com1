@@ -30,7 +30,7 @@
         </div>
         <div>
             <label>Autorización</label>
-            <input type="file" class="form-control" name="autorizacion" accept="image/png, image/gif, image/jpeg image/jpg">
+            <input type="file" class="form-control" name="autorizacion" accept="image/jpeg image/jpg">
             @error('autorización')
             <small>*{{$message}}</small>
             @enderror

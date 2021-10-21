@@ -19,10 +19,6 @@ class PrestacionController extends Controller
     }
 
     public function store(Request $request) {
-        $request->validate([
-            'autorizacion' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-        ]);
-
         $file = $request->file('autorizacion');
         $image = base64_encode(file_get_contents($file));
         $id_cliente = Cliente::where('email', Auth::user()->email)->get()[0]->id;
