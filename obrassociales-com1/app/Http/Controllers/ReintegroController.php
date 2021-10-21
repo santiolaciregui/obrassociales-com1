@@ -42,6 +42,13 @@ class ReintegroController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'comprobante'=> 'required',
+            'fecha_emision'=> 'required',
+            'profesional'=> 'required',
+            'importe'=> 'required'
+        ]);
+
         $cliente = Cliente::where('email', Auth::user()->email)->get()[0];
         $reintegro = new Reintegro();
         $reintegro->id_cliente = $cliente->id;
@@ -52,7 +59,7 @@ class ReintegroController extends Controller
         $reintegro->importe_facturado = $request->importe;
         $reintegro->save();
 
-        return redirect('/reintegro/create');
+        return redirect()->route('welcome');
     }
 
     /**

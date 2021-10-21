@@ -30,6 +30,6 @@ class PrestacionController extends Controller
             'id_cliente' => $id_cliente,
             'image' => $image
         ]);
-        return redirect('/prestacion/create');
+        return redirect()->route('welcome');
     }
 }
