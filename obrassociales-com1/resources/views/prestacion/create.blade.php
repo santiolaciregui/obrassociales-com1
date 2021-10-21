@@ -8,25 +8,16 @@
         <div>
             <label>DNI</label>
             <input type="number" class="form-control" name="dni" placeholder="{{ $client->dni }}" disabled>
-            @error('dni')
-            <small>*{{$message}}</small>
-            @enderror
         </div>
         <div>
             <label>Numero de afiliado</label>
             <input type="number" class="form-control" name="numero_afiliado" placeholder="{{ $client->id }}" disabled>
-            @error('numero_afiliado')
-            <small>*{{$message}}</small>
-            @enderror
         </div>
         <div class="form-group">
             <label>Plan</label>
             <select class="form-control" name="plan" disabled>
                 <option value="{{$client->plan_id}}" selected>{{ $plan->nombre }}</option>
             </select>
-            @error('plan')
-            <small>*{{$message}}</small>
-            @enderror
         </div>
         <div>
             <label>Fecha de envio de solicitud</label>
@@ -36,9 +27,6 @@
                     <span class="glyphicon glyphicon-th"></span>
                 </div>
             </div>
-            @error('fecha_solicitud')
-            <small>*{{$message}}</small>
-            @enderror
         </div>
         <div>
             <label>Autorización</label>
