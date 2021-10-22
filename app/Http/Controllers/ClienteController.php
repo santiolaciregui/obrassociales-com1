@@ -37,7 +37,7 @@ class ClienteController extends Controller
             'empresa'=> 'required',
             'cuil'=> 'required',
             'telefono'=> 'required',
-            'email'=> 'required',
+            'email' => 'required|email|unique:users,email',
             'plan' => 'required',
             'contraseña'=> 'required',
         ]);

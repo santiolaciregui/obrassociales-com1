@@ -28,7 +28,7 @@ class FamilyController extends Controller
             'fecha_nacimiento'=> 'required',
             'domicilio'=> 'required',
             'estado_civil'=> 'required',
-            'email'=> 'required',
+            'email' => 'required|email|unique:users,email',
             'plan' => 'required',
             'contraseña'=> 'required',
             'id_titular'=> 'required'
