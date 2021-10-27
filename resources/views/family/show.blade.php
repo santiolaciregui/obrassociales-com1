@@ -22,6 +22,7 @@ table{
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">DNI</th>
+                <th scope="col">Plan</th>
                 <th scope="col"><a href="{{route('familiar.create', ['id_titular' => $id_titular])}}" class="btn btn-light">Agregar nuevo</a><th>
             </tr>
         </thead>
@@ -32,7 +33,9 @@ table{
                 <td>{{$familiar['nombre']}}</td>
                 <td>{{$familiar['apellido']}}</td>
                 <td>{{$familiar['dni']}}</td>
+                <td>{{$familiar['plan']->nombre}}</td>
                 <td>
+                    <a href="{{route('familiar.update_plan', ['id' => $familiar->id])}}" class="btn btn-light">Cambiar Plan</a>
                     <a href="{{route('familiar.delete',[$familiar->id,$id_titular])}}" class="btn btn-light">Eliminar</a>
                 </td>
             </tr>

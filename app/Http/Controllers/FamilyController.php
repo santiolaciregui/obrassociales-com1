@@ -81,4 +81,31 @@ class FamilyController extends Controller
         ;
         return redirect()->route('client.show');
     }
+
+    public function update_plan($id){
+        $familiar = Cliente::findOrFail($id);
+        $urlBack = url()->previous();
+        $planes = Plan::all();
+        return view('family.update-plan')
+        ->with('familiar', $familiar)
+        ->with('planes', $planes)
+        ->with('urlBack', $urlBack);
+    }
+
+    public function patch_plan(Request $request)
+    {
+        $request->validate([
+            'plan'=> 'required'
+        ]);
+        try {
+            $familiar = Cliente::findOrFail($request->id);
+            $familiar->plan_id= $request->plan;
+            $familiar->save();
+            return redirect()->to($request->urlBack);
+        } catch (Exception $e) {
+            echo($e);
+            printf($e);
+            return redirect()->back();
+        }
+    }
 }

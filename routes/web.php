@@ -49,6 +49,8 @@ Route::middleware(['empleado'])->group(function () {
     Route::patch('/client-patch-plan', [ClienteController::class, 'patch_plan'])->name('client.patch_plan');
     Route::get('/client-management', [ClienteController::class, 'getAll'])->name('client.show');
 
+    Route::get('/familiar-management/update-plan/{id}', [FamilyController::class, 'update_plan'])->name('familiar.update_plan');
+    Route::patch('/familiar-patch-plan', [FamilyController::class, 'patch_plan'])->name('familiar.patch_plan');
     Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
     Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
     Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
