@@ -57,7 +57,11 @@ Route::middleware(['empleado'])->group(function () {
     Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
 });
 
+
 Route::middleware(['cliente'])->group(function () {
+    Route::get('/client-management/update/{id}', [ClienteController::class, 'update'])->name('client.update');
+    Route::patch('/client-patch', [ClienteController::class, 'patch'])->name('client.patch');
+
     Route::get('/cupon/create', [CuponDePagoController::class, 'create'])->name('cupon.create');
     Route::post('/cupon-store', [CuponDePagoController::class, 'store'])->name('cupon.store');
     Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPDF'])->name('cupon.download');
