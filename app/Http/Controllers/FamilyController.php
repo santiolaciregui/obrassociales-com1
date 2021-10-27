@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class FamilyController extends Controller
 {
@@ -57,6 +58,68 @@ class FamilyController extends Controller
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
 
+            return redirect()->route('welcome');
+        } catch (Exception $e) {
+            echo($e);
+            printf($e);
+        }
+    }
+
+    public function update($id){
+        $familiar = Cliente::findOrFail($id);
+        return view('family.update')
+        ->with('cliente', $familiar);
+    }
+
+    public function patch(Request $request)
+    {
+        $request->validate([
+            'dni'=> 'required',
+            'nombre'=> 'required',
+            'apellido'=> 'required',
+            'sexo'=> 'required',
+            'fecha_nacimiento'=> 'required',
+            'domicilio'=> 'required',
+            'estado_civil'=> 'required',
+            'email' => 'required|email|unique:users,email',
+            'plan' => 'required',
+            'contraseña'=> 'required',
+            'contraseña_nueva'=> 'required',
+            'id_titular'=> 'required'
+        ]);
+        try {
+            $familiar = Cliente::findOrFail($request->id);
+            $passwordViejaHash=Hash::make($request->contraseña);
+            $passwordNuevaHash=Hash::make($request->contraseña_nueva);
+            if($passwordViejaHash != $passwordNuevaHash){
+                $familiar->dni= $request->dni;
+                $familiar->nombre= $request->nombre;
+                $familiar->apellido= $request->apellido;
+                $familiar->sexo= $request->sexo;
+                $familiar->fecha_nacimiento= $request->fecha_nacimiento;
+                $familiar->domicilio= $request->domicilio;
+                $familiar->estado_civil= $request->estado_civil;
+                $familiar->plan_id= $request->plan;
+                $familiar->email= $request->email;
+                $familiar->id_titular= $request->id_titular;
+                $familiar->password=$passwordNuevaHash;
+                $familiar->role_id=Role::CLIENTE;
+                $familiar->save();
+            }
+            else{
+                $familiar->dni= $request->dni;
+                $familiar->nombre= $request->nombre;
+                $familiar->apellido= $request->apellido;
+                $familiar->sexo= $request->sexo;
+                $familiar->fecha_nacimiento= $request->fecha_nacimiento;
+                $familiar->domicilio= $request->domicilio;
+                $familiar->estado_civil= $request->estado_civil;
+                $familiar->plan_id= $request->plan;
+                $familiar->email= $request->email;
+                $familiar->id_titular= $request->id_titular;
+                $familiar->role_id=Role::CLIENTE;
+                $familiar->save();
+            }
             return redirect()->route('welcome');
         } catch (Exception $e) {
             echo($e);
