@@ -20,7 +20,7 @@ class Cliente
     {
         if (auth()->user() != null) {
             $cliente = ModelsCliente::where('email', auth()->user()->email)->get()[0];
-            if (auth()->user()->role_id == Role::CLIENTE && $cliente->id == $cliente->id_titular) {
+            if (auth()->user()->role_id == Role::CLIENTE && $cliente->id != $cliente->id_titular) {
                 return $next($request);
             }
         }
