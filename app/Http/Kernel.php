@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'empleado' => \App\Http\Middleware\Empleado::class,
         'cliente' => \App\Http\Middleware\Cliente::class,
         'familiar' => \App\Http\Middleware\Familiar::class,
+        'empleadoOcliente' => \App\Http\Middleware\EmpleadoOCliente::class
     ];
 }
