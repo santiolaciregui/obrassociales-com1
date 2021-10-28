@@ -35,7 +35,7 @@ table{
                 <td>
                     <a href="{{route('client.update', ['id' => $cliente->id])}}" class="btn btn-light">Editar Datos</a>
                     <a href="{{route('client.update_plan', ['id' => $cliente->id])}}" class="btn btn-light">Cambiar Plan</a>
-                    <a href="{{route('family.list', ['id_titular' => $cliente->id])}}" class="btn btn-light">Administrar familiares</a>
+                    <a href="{{route('familiar.list', ['id_titular' => $cliente->id])}}" class="btn btn-light">Administrar familiares</a>
                 </td>
             </tr>
             @endforeach

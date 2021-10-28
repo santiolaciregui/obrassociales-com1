@@ -19,10 +19,14 @@ class Cliente
     public function handle(Request $request, Closure $next)
     {
         if (auth()->user() != null) {
-            $cliente = ModelsCliente::where('email', auth()->user()->email)->get()[0];
-            if (auth()->user()->role_id == Role::CLIENTE && $cliente->id == $cliente->id_titular) {
-                return $next($request);
+            if(auth()->user()->role_id == Role::CLIENTE){
+                $cliente = ModelsCliente::where('email', auth()->user()->email)->get()[0];
+                if ($cliente->id == $cliente->id_titular) {
+                    return $next($request);
+                }
             }
+            else
+                return redirect()->route('welcome')->with('error', 'Permiso denegado');
         }
         else{
             return redirect()->route('welcome')->with('error', 'Permiso denegado');

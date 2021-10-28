@@ -53,8 +53,8 @@ Route::middleware(['empleado'])->group(function () {
     Route::patch('/familiar-patch-plan', [FamilyController::class, 'patch_plan'])->name('familiar.patch_plan');
     Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
     Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
-    Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
-    Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
+    Route::get('/client-management/{id_titular}/familiar', [FamilyController::class, 'getAll'])->name('familiar.list');
+    Route::get('/client-management/familiar/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
 });
 
 
@@ -73,7 +73,7 @@ Route::middleware(['cliente'])->group(function () {
     Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
     Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
     Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
-    Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
+    Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('family.delete');
 
     Route::get('/client-management/update/{id}', [ClienteController::class, 'update'])->name('client.update');
     Route::patch('/client-patch', [ClienteController::class, 'patch'])->name('client.patch');
