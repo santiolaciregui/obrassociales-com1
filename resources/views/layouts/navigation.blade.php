@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light"> 
-  <button class="navbar-toggler" type="button"  data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -19,28 +19,26 @@
           {{auth()->user()->nombre}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        @if(!auth()->user()->hasRole('administrador'))
+          @if(!auth()->user()->hasRole('administrador'))
           @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
-              @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id == App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
-              <a href="{{route('client.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
-              @endif
-            @endif
-            @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
-              @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id != App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
-              <a href="{{route('familiar.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
-              @endif
-            @endif
+          @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id == App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
+          <a href="{{route('client.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
           @endif
+          @endif
+          @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
+          @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id != App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
+          <a href="{{route('familiar.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">
-            <form method="POST" action="{{ route('logout') }}">
-              @csrf
-              <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
+          @endif
+          @endif
+          @endif
+          <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
-                {{ __('Log out') }}
-              </x-responsive-nav-link>
-            </form>
-          </a>
+              {{ __('Log out') }}
+            </x-responsive-nav-link>
+          </form>
         </div>
         @endif
       </li>

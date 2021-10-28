@@ -65,7 +65,7 @@ Route::middleware(['cliente'])->group(function () {
     Route::post('/prestacion-store', [PrestacionController::class, 'store'])->name('prestacion.store');
 });
 
-Route::middleware(['empleadoOcliente'])->group(function () { //ESTAS TIENEN QUE SER ACCEDIDAS POR EL EMPLEADO TAMBIEN
+Route::middleware(['empleadoOcliente'])->group(function () { 
     Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
     Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
     Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
