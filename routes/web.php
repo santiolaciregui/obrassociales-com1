@@ -58,13 +58,26 @@ Route::middleware(['empleado'])->group(function () {
 });
 
 
-Route::middleware(['cliente'])->group(function () {
-    Route::get('/client-management/update/{id}', [ClienteController::class, 'update'])->name('client.update');
-    Route::patch('/client-patch', [ClienteController::class, 'patch'])->name('client.patch');
-
+Route::middleware(['familiar'])->group(function () {
     Route::get('/familiar-management/update/{id}', [FamilyController::class, 'update'])->name('familiar.update');
     Route::patch('/familiar-patch', [FamilyController::class, 'patch'])->name('familiar.patch');
 
+
+});
+
+Route::middleware(['cliente'])->group(function () {
+    Route::get('/familiar-management/update-plan/{id}', [FamilyController::class, 'update_plan'])->name('familiar.update_plan');
+    Route::patch('/familiar-patch-plan', [FamilyController::class, 'patch_plan'])->name('familiar.patch_plan');
+    Route::get('/client-management/update-plan/{id}', [ClienteController::class, 'update_plan'])->name('client.update_plan');
+    Route::patch('/client-patch-plan', [ClienteController::class, 'patch_plan'])->name('client.patch_plan');
+    Route::get('/client-management/{id_titular}/family/add', [FamilyController::class, 'create'])->name('familiar.create');
+    Route::post('/familiar-store', [FamilyController::class, 'store'])->name('familiar.store');
+    Route::get('/client-management/{id_titular}/family', [FamilyController::class, 'getAll'])->name('family.list');
+    Route::get('/client-management/family/delete/{id_familiar}/{id_titular}', [FamilyController::class, 'delete'])->name('familiar.delete');
+
+    Route::get('/client-management/update/{id}', [ClienteController::class, 'update'])->name('client.update');
+    Route::patch('/client-patch', [ClienteController::class, 'patch'])->name('client.patch');
+   
     Route::get('/cupon/create', [CuponDePagoController::class, 'create'])->name('cupon.create');
     Route::post('/cupon-store', [CuponDePagoController::class, 'store'])->name('cupon.store');
     Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPDF'])->name('cupon.download');

@@ -19,11 +19,13 @@
           {{auth()->user()->nombre}}
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        @if(Auth::user()->hasRole('cliente') )
+        @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
+          @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id == App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
           <a href="{{route('client.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
           @endif
+          @endif
           @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
-          @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id === App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
+          @if(App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id != App\Models\Cliente::where('email', Auth::user()->email)->get()[0]->id_titular)
           <a href="{{route('familiar.update', ['id' => Auth::user()->id])}}" class="btn btn-light">Modificar mis datos</a>
           @endif
           @endif

@@ -81,7 +81,7 @@ class FamilyController extends Controller
             'fecha_nacimiento'=> 'required',
             'domicilio'=> 'required',
             'estado_civil'=> 'required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required',
             'plan' => 'required',
             'contraseña'=> 'required',
             'contraseña_nueva'=> 'required',
@@ -90,8 +90,7 @@ class FamilyController extends Controller
         try {
             $familiar = Cliente::findOrFail($request->id);
             $passwordViejaHash=Hash::make($request->contraseña);
-            $passwordNuevaHash=Hash::make($request->contraseña_nueva);
-            if($passwordViejaHash != $passwordNuevaHash){
+            if($familiar->password == $passwordViejaHash){
                 $familiar->dni= $request->dni;
                 $familiar->nombre= $request->nombre;
                 $familiar->apellido= $request->apellido;
@@ -102,23 +101,12 @@ class FamilyController extends Controller
                 $familiar->plan_id= $request->plan;
                 $familiar->email= $request->email;
                 $familiar->id_titular= $request->id_titular;
-                $familiar->password=$passwordNuevaHash;
+                $familiar->password=Hash::make($request->contraseña_nueva);
                 $familiar->role_id=Role::CLIENTE;
                 $familiar->save();
             }
             else{
-                $familiar->dni= $request->dni;
-                $familiar->nombre= $request->nombre;
-                $familiar->apellido= $request->apellido;
-                $familiar->sexo= $request->sexo;
-                $familiar->fecha_nacimiento= $request->fecha_nacimiento;
-                $familiar->domicilio= $request->domicilio;
-                $familiar->estado_civil= $request->estado_civil;
-                $familiar->plan_id= $request->plan;
-                $familiar->email= $request->email;
-                $familiar->id_titular= $request->id_titular;
-                $familiar->role_id=Role::CLIENTE;
-                $familiar->save();
+                return redirect()->back()->with('error','La contraseña actual no coincide');
             }
             return redirect()->route('welcome');
         } catch (Exception $e) {

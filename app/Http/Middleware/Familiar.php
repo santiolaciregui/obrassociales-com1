@@ -28,6 +28,6 @@ class Cliente
             return redirect()->route('welcome')->with('error', 'Permiso denegado');
         }
 
-        return redirect()->route('welcome');
+        return redirect()->route('welcome')->with('error', 'Permiso denegado');
     }
 }

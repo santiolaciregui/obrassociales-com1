@@ -86,15 +86,6 @@ class ClienteController extends Controller
         ->with('cliente', $cliente);
     }
 
-    public function update_plan($id){
-        $cliente = Cliente::findOrFail($id);
-        $planes = Plan::all();
-        return view('client.update-plan')
-        ->with('cliente', $cliente)
-        ->with('planes', $planes);
-    }
-
-
     public function patch(Request $request)
     {
         $request->validate([
@@ -116,8 +107,7 @@ class ClienteController extends Controller
         try {
             $cliente = Cliente::findOrFail($request->id);
             $passwordViejaHash=Hash::make($request->contraseña);
-            $passwordNuevaHash=Hash::make($request->contraseña_nueva);
-            if($passwordViejaHash != $passwordNuevaHash){
+            if($cliente->password == $passwordViejaHash){
                 $cliente->dni= $request->dni;
                 $cliente->nombre= $request->nombre;
                 $cliente->apellido= $request->apellido;
@@ -129,24 +119,12 @@ class ClienteController extends Controller
                 $cliente->cuil= $request->cuil;
                 $cliente->telefono= $request->telefono;
                 $cliente->email= $request->email;
-                $cliente->password=$passwordNuevaHash;
+                $cliente->password=Hash::make($request->contraseña_nueva);
                 $cliente->role_id=Role::CLIENTE;
                 $cliente->save();
             }
             else{
-                $cliente->dni= $request->dni;
-                $cliente->nombre= $request->nombre;
-                $cliente->apellido= $request->apellido;
-                $cliente->sexo= $request->sexo;
-                $cliente->fecha_nacimiento= $request->fecha_nacimiento;
-                $cliente->domicilio= $request->domicilio;
-                $cliente->estado_civil= $request->estado_civil;
-                $cliente->empresa= $request->empresa;
-                $cliente->cuil= $request->cuil;
-                $cliente->telefono= $request->telefono;
-                $cliente->email= $request->email;
-                $cliente->role_id=Role::CLIENTE;
-                $cliente->save();
+                return redirect()->back()->with('error','La contraseña actual no coincide');
             }
             return redirect()->route('welcome');
         } catch (Exception $e) {
@@ -154,6 +132,15 @@ class ClienteController extends Controller
             return redirect()->back();
         }
     }
+
+    public function update_plan($id){
+        $cliente = Cliente::findOrFail($id);
+        $planes = Plan::all();
+        return view('client.update-plan')
+        ->with('cliente', $cliente)
+        ->with('planes', $planes);
+    }
+    
     public function patch_plan(Request $request)
     {
         $request->validate([
