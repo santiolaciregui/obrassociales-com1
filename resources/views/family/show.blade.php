@@ -37,7 +37,8 @@ table{
                 <td>
                     <a href="{{route('familiar.update_plan', ['id' => $familiar->id])}}" class="btn btn-light">Cambiar Plan</a>
                     <a href="{{route('familiar.delete',[$familiar->id,$id_titular])}}" class="btn btn-light">Eliminar</a>
-                </td>
+                    <a href="{{route('familiar.update',['id' => $familiar->id])}}" class="btn btn-light">Editar datos</a>
+                  </td>
             </tr>
             @endforeach
         </tbody>

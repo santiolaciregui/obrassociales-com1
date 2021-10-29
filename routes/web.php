@@ -45,7 +45,7 @@ Route::middleware(['empleado'])->group(function () {
 });
 
 
-Route::middleware(['familiar'])->group(function () {
+Route::middleware(['empleadoOfamiliar'])->group(function () {
     Route::get('/familiar-management/update/{id}', [FamilyController::class, 'update'])->name('familiar.update');
     Route::patch('/familiar-patch', [FamilyController::class, 'patch'])->name('familiar.patch');
 });
