@@ -34,6 +34,9 @@ table{
                 <td>{{$plan['costo']}}</td>
                 <td>
                     <a href="{{route('plan.update', ['id' => $plan->id])}}" class="btn btn-light">Editar</a>
+                    @if ($eliminar[$plan->id])
+                    <a href="{{route('plan.delete', ['id_plan' => $plan->id])}}" class="btn btn-light">Eliminar</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
