@@ -2,21 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Plan;
 use App\Models\Prestacion;
+use App\Models\Plan;
+use App\Models\Cliente;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class PlanController extends Controller
 {
     public function getAll(){
         $planes=Plan::all();
+        $eliminar = [];
+        foreach ($planes as $plan) {
+            $clients = Cliente::where('plan_id', $plan->id)->get();
+            $eliminar[$plan->id] = count($clients) === 0;
+        }
         return view('plan.show')
-        ->with('planes',$planes);
+        ->with('planes',$planes)
+        ->with('eliminar', $eliminar);
     }
 
-   
+
     public function create(){
         $admin=auth()->user();
         $prestaciones=Prestacion::all();
@@ -88,5 +96,13 @@ class PlanController extends Controller
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
         return redirect()->route('welcome');
+    }
+
+    function delete($id) {
+        $plan = Plan::findOrFail($id);
+        $plan->destroy($plan->id);
+        $plan->save();
+
+        return redirect()->route('plan.show');
     }
 }
