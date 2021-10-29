@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\Cliente;
 use App\Models\Plan;
+use App\Models\Reintegro;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -158,5 +159,8 @@ class ClienteController extends Controller
         }
     }
 
-
+    public function listReintegros() {
+        $reintegros = Reintegro::all();
+        return redirect()->route('reintegros.list')->with('reintegros',$reintegros);
+    }
 }
