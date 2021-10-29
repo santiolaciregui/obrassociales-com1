@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prestacion;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 
 class BenefitController extends Controller
@@ -12,7 +13,12 @@ class BenefitController extends Controller
 
     public function show(){
         $prestaciones = Prestacion::all();
-        return view('benefits.show')->with('prestaciones', $prestaciones);
+        $show = [];
+        foreach ($prestaciones as $prestacion) {
+            $plans = DB::table("plan_prestacion")->select("*")->where('prestacion_id', $prestacion->id)->get();
+            $show[$prestacion->nombre] = count($plans) === 0;
+        }
+        return view('benefits.show')->with('prestaciones', $prestaciones)->with('show', $show);
     }
 
     public function create(){

@@ -32,7 +32,9 @@
             <tr>
                 <td>{{$prestacion['nombre']}}</td>
                 <td>
-                    <a href="{{route('benefit.delete',$prestacion->id)}}" class="btn btn-light">Eliminar</a>
+                    @if ($show[$prestacion->nombre])
+                        <a href="{{route('benefit.delete',$prestacion->id)}}" class="btn btn-light">Eliminar</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
