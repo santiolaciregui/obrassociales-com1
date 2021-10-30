@@ -23,16 +23,17 @@ class PrestacionController extends Controller
     public function store(Request $request) {
         $file = $request->file('autorizacion');
         $image = base64_encode(file_get_contents($file));
-        $id_cliente = Cliente::where('email', Auth::user()->email)->get()[0]->id;
+        $nombre = Cliente::where('email', Auth::user()->email)->get()[0]->nombre;
         DB::table('solicitud_prestaciones')->insert([
-            'id_cliente' => $id_cliente,
+            'nombre_cliente' => $nombre,
             'image' => $image
         ]);
         return redirect()->route('welcome');
     }
 
     public function listSolicitudesPrestaciones() {
-        $solicitudes = SolicitudPrestacion::orderBy('created_at','desc')->get();;
+        $pendiente = 'PENDIENTE';
+        $solicitudes = SolicitudPrestacion::where('estado','=','PENDIENTE')->orderBy('created_at','desc')->get();
         return view('prestacion.list')->with('solicitudes',$solicitudes);
     }
 }

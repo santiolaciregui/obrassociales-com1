@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reintegro extends Model
 {
-    use HasFactory;
+    protected $table = 'reintegros';
+    
+    protected $primaryKey="id";
+
+    protected $fillable =['id','nombre_cliente','fecha_solicitud','comprobante_factura','fecha_emision','nombre_profesional','importe_facturado','estado'];
 }

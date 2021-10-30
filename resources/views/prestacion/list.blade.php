@@ -27,9 +27,9 @@ table{
         <tbody>
             @foreach($solicitudes as $solicitud)
             <tr>
-                <th scope="row">{{$solicitud['nombre']}}</th>
+                <td>{{$solicitud['nombre_cliente']}}</td>
                 <td>{{$solicitud['created_at']}}</td>
-                <td>Pendiente (hardcodeado)</td>
+                <td>{{$solicitud['estado']}}</td>
                 <td>
                     <a href="#" class="btn btn-light">Ver</a>
                 </td>

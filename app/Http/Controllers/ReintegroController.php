@@ -64,7 +64,7 @@ class ReintegroController extends Controller
 
     
     public function listReintegros() {
-        $reintegros = Reintegro::orderBy('fecha_solicitud','desc')->get();;
+        $reintegros = Reintegro::where('estado','=','PENDIENTE')->orderBy('fecha_solicitud','desc')->get();;
         return view('reintegro.list')->with('reintegros',$reintegros);
     }
 
