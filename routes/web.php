@@ -45,6 +45,7 @@ Route::middleware(['empleado'])->group(function () {
     Route::post('/client-store', [ClienteController::class, 'store'])->name('client.store');
 
     Route::get('/reintegros', [ReintegroController::class, 'listReintegros'])->name('reintegros.list');
+    Route::get('/prestaciones', [PrestacionController::class, 'listSolicitudesPrestaciones'])->name('prestaciones.list');
 });
 
 

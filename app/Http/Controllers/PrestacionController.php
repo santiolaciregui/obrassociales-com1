@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cliente;
 use App\Models\Plan;
+use App\Models\Prestacion;
+use App\Models\SolicitudPrestacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,5 +29,10 @@ class PrestacionController extends Controller
             'image' => $image
         ]);
         return redirect()->route('welcome');
+    }
+
+    public function listSolicitudesPrestaciones() {
+        $solicitudes = SolicitudPrestacion::orderBy('created_at','desc')->get();;
+        return view('prestacion.list')->with('solicitudes',$solicitudes);
     }
 }

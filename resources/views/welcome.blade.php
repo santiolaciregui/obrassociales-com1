@@ -13,7 +13,8 @@
     @if(Auth::user()->hasRole('empleado'))
     <a class="btn btn-light btn-lg" type="button" href="/client-management/create">Alta cliente</a>
     <a class="btn btn-light btn-lg" type="button" href="/client-management/">Modificar cliente</a>
-    <a class="btn btn-light btn-lg" type="button" href="/reintegros">Reintegros</a>
+    <a class="btn btn-light btn-lg" type="button" href="/reintegros">Solicitudes de reintegros</a>
+    <a class="btn btn-light btn-lg" type="button" href="/prestaciones">Solicitudes de prestaciones</a>
     @endif
 
     @if(count(App\Models\Cliente::where('email', Auth::user()->email)->get()) > 0)
