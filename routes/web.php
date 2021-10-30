@@ -45,6 +45,9 @@ Route::middleware(['empleado'])->group(function () {
     Route::post('/client-store', [ClienteController::class, 'store'])->name('client.store');
 
     Route::get('/reintegros', [ReintegroController::class, 'listReintegros'])->name('reintegros.list');
+    Route::get('/reintegro/update/{id}', [ReintegroController::class, 'update'])->name('reintegro.update');
+    Route::get('/reintegro/update/{id}/{estado}', [ReintegroController::class, 'patch'])->name('reintegro.patch');
+
     Route::get('/prestaciones', [PrestacionController::class, 'listSolicitudesPrestaciones'])->name('prestaciones.list');
     Route::get('/prestacion/update/{id}', [PrestacionController::class, 'update'])->name('prestacion.update');
     Route::get('/prestacion/update/{id}/{estado}', [PrestacionController::class, 'patch'])->name('prestacion.patch');

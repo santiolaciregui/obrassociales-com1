@@ -33,7 +33,7 @@ table{
                 <td>{{$reintegro['fecha_solicitud']}}</td>
                 <td>{{$reintegro['estado']}}</td>
                 <td>
-                    <a href="#" class="btn btn-light">Ver</a>
+                <a href="{{route('reintegro.update', ['id' => $reintegro->id])}}" class="btn btn-light">Ver</a>
                 </td>
             </tr>
             @endforeach
