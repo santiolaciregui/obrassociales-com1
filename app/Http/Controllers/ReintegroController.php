@@ -62,6 +62,12 @@ class ReintegroController extends Controller
         return redirect()->route('welcome');
     }
 
+    
+    public function listReintegros() {
+        $reintegros = Reintegro::orderBy('fecha_solicitud','desc')->get();;
+        return view('reintegro.list')->with('reintegros',$reintegros);
+    }
+
     /**
      * Display the specified resource.
      *

@@ -158,9 +158,4 @@ class ClienteController extends Controller
             return redirect()->back();
         }
     }
-
-    public function listReintegros() {
-        $reintegros = Reintegro::all();
-        return redirect()->route('reintegros.list')->with('reintegros',$reintegros);
-    }
 }
