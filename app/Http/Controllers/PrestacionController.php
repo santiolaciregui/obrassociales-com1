@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\DB;
 
 class PrestacionController extends Controller
 {
-    public function create() {
+    public function create()
+    {
         $client = Cliente::where('email', Auth::user()->email)->get()[0];
-        $plan = Plan::whereRaw('id = '. $client->plan_id)->get()[0];
+        $plan = Plan::whereRaw('id = ' . $client->plan_id)->get()[0];
         $today = Carbon::now();
-        return view('prestacion.create')->with('client',$client)->with('plan', $plan)->with('today', $today->toDateString());
+        return view('prestacion.create')->with('client', $client)->with('plan', $plan)->with('today', $today->toDateString());
     }
 
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $file = $request->file('autorizacion');
         $image = base64_encode(file_get_contents($file));
         $nombre = Cliente::where('email', Auth::user()->email)->get()[0]->nombre;
@@ -31,9 +33,26 @@ class PrestacionController extends Controller
         return redirect()->route('welcome');
     }
 
-    public function listSolicitudesPrestaciones() {
+    public function listSolicitudesPrestaciones()
+    {
         $pendiente = 'PENDIENTE';
-        $solicitudes = SolicitudPrestacion::where('estado','=','PENDIENTE')->orderBy('created_at','desc')->get();
-        return view('prestacion.list')->with('solicitudes',$solicitudes);
+        $solicitudes = SolicitudPrestacion::orderBy('created_at', 'desc')->get();
+        return view('prestacion.list')->with('solicitudes', $solicitudes);
+    }
+
+    public function update($id)
+    {
+        $solicitud = SolicitudPrestacion::findOrFail($id);
+        return view('prestacion.update')
+            ->with('solicitud', $solicitud);
+    }
+
+    public function patch($id, $estado)
+    {
+        $solicitud = SolicitudPrestacion::findOrFail($id);
+        $solicitud->estado = $estado;
+        $solicitud->save();
+
+        return redirect()->route('prestaciones.list');
     }
 }

@@ -46,6 +46,8 @@ Route::middleware(['empleado'])->group(function () {
 
     Route::get('/reintegros', [ReintegroController::class, 'listReintegros'])->name('reintegros.list');
     Route::get('/prestaciones', [PrestacionController::class, 'listSolicitudesPrestaciones'])->name('prestaciones.list');
+    Route::get('/prestacion/update/{id}', [PrestacionController::class, 'update'])->name('prestacion.update');
+    Route::get('/prestacion/update/{id}/{estado}', [PrestacionController::class, 'patch'])->name('prestacion.patch');
 });
 
 

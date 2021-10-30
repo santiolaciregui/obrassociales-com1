@@ -31,7 +31,7 @@ table{
                 <td>{{$solicitud['created_at']}}</td>
                 <td>{{$solicitud['estado']}}</td>
                 <td>
-                    <a href="#" class="btn btn-light">Ver</a>
+                <a href="{{route('prestacion.update', ['id' => $solicitud->id])}}" class="btn btn-light">Ver</a>
                 </td>
             </tr>
             @endforeach
