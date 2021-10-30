@@ -64,8 +64,24 @@ class ReintegroController extends Controller
 
     
     public function listReintegros() {
-        $reintegros = Reintegro::where('estado','=','PENDIENTE')->orderBy('fecha_solicitud','desc')->get();;
+        $reintegros = Reintegro::orderBy('fecha_solicitud','desc')->get();;
         return view('reintegro.list')->with('reintegros',$reintegros);
+    }
+
+    public function update($id)
+    {
+        $solicitud = Reintegro::findOrFail($id);
+        return view('reintegro.update')
+            ->with('solicitud', $solicitud);
+    }
+
+    public function patch($id, $estado)
+    {
+        $solicitud = Reintegro::findOrFail($id);
+        $solicitud->estado = $estado;
+        $solicitud->save();
+
+        return redirect()->route('reintegros.list');
     }
 
     /**
@@ -90,17 +106,6 @@ class ReintegroController extends Controller
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Reintegro  $reintegro
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Reintegro $reintegro)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
