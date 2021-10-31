@@ -6,8 +6,8 @@
 <html style="text-align-last: center">
 <div class="btn-group" role="group" aria-label="Basic outlined example" >
     @if(Auth::user()->hasRole('administrador'))
-    <a class="btn btn-light btn-lg" type="button" href="/plan-management/create">Alta plan</a>
-    <a class="btn btn-light btn-lg" type="button" href="/plan-management/">Modificar plan</a>
+    <!---->
+    <a class="btn btn-light btn-lg" type="button" href="/plan-management/">Administrar planes</a>
     <a class="btn btn-light btn-lg" type="button" href="/benefits">Administrar prestaciones</a>
     @endif
     @if(Auth::user()->hasRole('empleado'))
@@ -28,7 +28,7 @@
     @if(Auth::user()->hasRole('cliente'))
     <a class="btn btn-light btn-lg" type="button" href="/reintegro/create">Solicitar aprobación de reintegro</a>
     <a class="btn btn-light btn-lg" type="button" href="/prestacion/create">Solicitar aprobación de prestación</a>
-    
+
     @endif
 </div>
 

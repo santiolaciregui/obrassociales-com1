@@ -15,6 +15,7 @@ table{
 
 <html>
 <div class=container>
+    <a class="btn btn-light btn-lg" type="button" href="/plan-management/create">Alta plan</a>
     <table class="table align-middle">
         <thead>
             <tr>
