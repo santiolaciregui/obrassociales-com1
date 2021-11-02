@@ -15,7 +15,7 @@ class SolicitudesReintegrosSeeder extends Seeder
     public function run()
     {
         $solicitud = new Reintegro();
-        $solicitud->nombre_cliente = 'Rodrigo Pereyra';
+        $solicitud->id_cliente = '1';
         $solicitud->estado = 'PENDIENTE';
         $solicitud->fecha_solicitud = '10/10/2021';
         $solicitud->fecha_emision = '10/15/2021';
@@ -25,7 +25,7 @@ class SolicitudesReintegrosSeeder extends Seeder
         $solicitud->save(); 
 
         $solicitud = new Reintegro();
-        $solicitud->nombre_cliente = 'Juan Mora';
+        $solicitud->id_cliente = '2';
         $solicitud->estado = 'PENDIENTE';
         $solicitud->fecha_solicitud = '09/17/2021';
         $solicitud->fecha_emision = '08/10/2021';
@@ -35,7 +35,7 @@ class SolicitudesReintegrosSeeder extends Seeder
         $solicitud->save(); 
 
         $solicitud = new Reintegro();
-        $solicitud->nombre_cliente = 'Noelia Arens';
+        $solicitud->id_cliente = '3';
         $solicitud->estado = 'PENDIENTE';
         $solicitud->fecha_solicitud = '10/5/2021';
         $solicitud->fecha_emision = '10/10/2021';

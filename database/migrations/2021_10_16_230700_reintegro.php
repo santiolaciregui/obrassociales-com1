@@ -15,7 +15,7 @@ class Reintegro extends Migration
     {
         Schema::create('reintegros', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_cliente');
+            $table->integer('id_cliente');
             $table->date('fecha_solicitud');
             $table->bigInteger('comprobante_factura');
             $table->date('fecha_emision');

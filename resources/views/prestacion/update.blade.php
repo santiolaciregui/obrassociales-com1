@@ -5,7 +5,7 @@
 <h2>Solicitud de prestación</h2>
 <ul>
   <li>ID de prestacion: {{$solicitud->id}}</li>
-  <li>Nombre del cliente: {{$solicitud->nombre_cliente}}</li>
+  <li>Nombre del cliente: {{$solicitud->id_cliente}}</li>
   <li>Fecha de solicitud: {{$solicitud->created_at}}</li>
   <li>Estado: {{$solicitud->estado}}</li>
   <li>imagen: {{$solicitud->image}}</li>

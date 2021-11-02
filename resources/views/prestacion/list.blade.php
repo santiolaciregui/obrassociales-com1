@@ -27,7 +27,7 @@ table{
         <tbody>
             @foreach($solicitudes as $solicitud)
             <tr>
-                <td>{{$solicitud['nombre_cliente']}}</td>
+                <td>{{$solicitud['id_cliente']}}</td>
                 <td>{{$solicitud['created_at']}}</td>
                 <td>{{$solicitud['estado']}}</td>
                 <td>

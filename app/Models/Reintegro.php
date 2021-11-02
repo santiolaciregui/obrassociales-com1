@@ -11,5 +11,5 @@ class Reintegro extends Model
     
     protected $primaryKey="id";
 
-    protected $fillable =['id','nombre_cliente','fecha_solicitud','comprobante_factura','fecha_emision','nombre_profesional','importe_facturado','estado'];
+    protected $fillable =['id','id_cliente','fecha_solicitud','comprobante_factura','fecha_emision','nombre_profesional','importe_facturado','estado'];
 }

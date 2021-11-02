@@ -25,9 +25,9 @@ class PrestacionController extends Controller
     {
         $file = $request->file('autorizacion');
         $image = base64_encode(file_get_contents($file));
-        $nombre = Cliente::where('email', Auth::user()->email)->get()[0]->nombre;
+        $id = Cliente::where('email', Auth::user()->email)->get()[0]->id;
         DB::table('solicitud_prestaciones')->insert([
-            'nombre_cliente' => $nombre,
+            'id_cliente' => $id,
             'image' => $image
         ]);
         return redirect()->route('welcome');

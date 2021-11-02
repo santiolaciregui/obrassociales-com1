@@ -11,5 +11,5 @@ class SolicitudPrestacion extends Model
     
     protected $primaryKey="id";
 
-    protected $fillable =['id','nombre_cliente','image'];
+    protected $fillable =['id','id_cliente','image'];
 }

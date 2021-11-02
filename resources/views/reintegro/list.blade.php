@@ -28,7 +28,7 @@ table{
         <tbody>
             @foreach($reintegros as $reintegro)
             <tr>
-                <td>{{$reintegro['nombre_cliente']}}</td>
+                <td>{{$reintegro['id_cliente']}}</td>
                 <td>{{$reintegro['nombre_profesional']}}</td>
                 <td>{{$reintegro['fecha_solicitud']}}</td>
                 <td>{{$reintegro['estado']}}</td>

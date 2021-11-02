@@ -15,7 +15,7 @@ class SolicitudPrestaciones extends Migration
     {
         Schema::create('solicitud_prestaciones', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('nombre_cliente');
+            $table->integer('id_cliente');
             $table->text('image')->nullable();
             $table->string('estado');
             $table->timestamps();
