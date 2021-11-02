@@ -5,7 +5,7 @@
 
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
   <style type="text/css">
     .dropdown-toggle {
@@ -21,11 +21,21 @@
 </head>
 
 <body>
+  @if(session()->has('mensaje'))
+    <div class="alert alert-success">
+        {{ session()->get('mensaje') }}
+    </div>
+@endif
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
   <h2>Alta de Plan</h2>
   <form action="{{route('plan.store')}}" method="POST">
     @csrf
     <label>Nombre</label>
-    <input type="text" class="form-control" name="nombre" placeholder="Plan A/Plan B/Plan C">
+    <input type="text" class="form-control" name="nombre" placeholder="Plan A/Plan B/Plan C" required>
     <br>
     <div class="form-group">
       <label>Tipo</label>
@@ -36,11 +46,11 @@
       </select>
     </div>
     <label>Costo</label>
-    <input type="number" class="form-control" name="costo" placeholder="1200">
+    <input type="number" class="form-control" name="costo" placeholder="1200" required>
     <br>
     <label>Prestaciones</label>
     <div>
-      <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]">
+      <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]" required>
         @foreach($prestaciones as $prestacion)
         <option value="{{$prestacion['id']}}">{{$prestacion['nombre']}}</option>
         @endforeach
@@ -51,9 +61,9 @@
       <label>Edad</label>
       <div>
         <label>desde</label>
-        <input type="text" class="form-control" name="edad_desde" placeholder="0">
+        <input type="text" class="form-control" name="edad_desde" placeholder="0" required>
         <label>hasta</label>
-        <input type="text" class="form-control" name="edad_hasta" placeholder="50">
+        <input type="text" class="form-control" name="edad_hasta" placeholder="50" required>
       </div>
     </div>
     <br>
@@ -79,9 +89,10 @@
 
 @endsection
 
-
-<?php
-if (isset($_POST['prestaciones'])) {
-  print_r($_POST['prestaciones']);
-}
-?>
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

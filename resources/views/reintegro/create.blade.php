@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 @extends('layouts.main')
 @section('contenedor')
+@if(session()->has('mensaje'))
+    <div class="alert alert-success">
+        {{ session()->get('mensaje') }}
+    </div>
+@endif
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
     <html>
     <h2>Solicitar aprobación de reintegro</h2>
     <form action="{{route('reintegro.store')}}" method="POST">
@@ -38,7 +48,7 @@
         </div>
         <div>
             <label>Comprobante de factura</label>
-            <input type="number" class="form-control" name="comprobante" placeholder="32423424322432">
+            <input type="number" class="form-control" name="comprobante" placeholder="32423424322432" required>
         </div>
         @error('comprobante')
             <small>*{{$message}}</small>
@@ -46,7 +56,7 @@
         <div>
             <label>Fecha de emision de la factura</label>
             <div class="input-group date" name="fecha_emision" data-provide="datepicker">
-                <input type="date" class="form-control" name="fecha_emision">
+                <input type="date" class="form-control" name="fecha_emision" required>
                 <div class="input-group-addon">
                     <span class="glyphicon glyphicon-th"></span>
                 </div>
@@ -57,14 +67,14 @@
         </div>
         <div>
             <label>Nombre profesional</label>
-            <input type="text" class="form-control" name="profesional" placeholder="Gerardo Rodriguez">
+            <input type="text" class="form-control" name="profesional" placeholder="Gerardo Rodriguez" required>
             @error('profesional')
             <small>*{{$message}}</small>
             @enderror
         </div>
         <div>
             <label>Importe facturado</label>
-            <input type="number" class="form-control" name="importe" placeholder="1000">
+            <input type="number" class="form-control" name="importe" placeholder="1000" required>
             @error('importe')
             <small>*{{$message}}</small>
             @enderror
@@ -73,7 +83,18 @@
         <td>
             <button type="submit" class="btn btn-dark">Finalizar solicitud de reintegro</button>
         </td>
+        <td>
+        <a href="javascript: history.go(-1)" class="btn btn-secondary">Cancelar</a>
+        </td>
     </form>
 
     </html>
 @endsection
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

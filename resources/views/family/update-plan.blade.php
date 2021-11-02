@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 @extends('layouts.main')
 @section('contenedor')
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <html>
 <h2>Cambiar plan asociado al familiar</h2>
 <form action="{{route('familiar.patch_plan', ['id' => $familiar->id, 'urlBack' => $urlBack] )}}" method="POST">
@@ -29,7 +34,7 @@
 
   <div class="form-group">
     <label>Seleccionar Plan</label>
-    <select class="form-control" name="plan">
+    <select class="form-control" name="plan" required>
       @foreach($planes as $plan)
       <option value="{{$plan['id']}}">{{$plan['nombre']}}</option>
       @endforeach
@@ -46,3 +51,11 @@
 
 </html>
 @endsection
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

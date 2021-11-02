@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 @extends('layouts.main')
 @section('contenedor')
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <html>
 <h2>Solicitud de prestación</h2>
 <ul>
@@ -19,3 +24,10 @@
 
 </html>
 @endsection
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

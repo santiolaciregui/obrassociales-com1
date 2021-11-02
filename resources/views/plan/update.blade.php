@@ -22,16 +22,21 @@
 </head>
 
 <body>
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
 <h2>Modificar plan</h2>
 <form action="{{route('plan.patch', ['id' => $plan->id])}}" method="POST" enctype="multipart/form-data">
     @method('PATCH')
     @csrf
   <label>Nombre</label>
-  <input type="text" class="form-control" name="nombre" value="{{$plan->nombre}}">
+  <input type="text" class="form-control" name="nombre" value="{{$plan->nombre}}" required>
   <hr>
   <div class="form-group">
     <label>Tipo</label>
-    <select class="form-control" name="tipo" value="{{$plan->tipo}}">
+    <select class="form-control" name="tipo" value="{{$plan->tipo}}" required>
       <option value="A">A</option>
       <option value="B">B</option>
       <option value="C">C</option>
@@ -39,11 +44,11 @@
   </div>
   <hr>
   <label>Costo</label>
-  <input type="number" class="form-control" name="costo" placeholder="1200" value="{{$plan->costo}}">
+  <input type="number" class="form-control" name="costo" placeholder="1200" value="{{$plan->costo}}" required>
   <hr>
   <label>Prestaciones</label>
   <div>
-      <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]">
+      <select class="selectpicker" multiple data-live-search="true" name="prestaciones[]" required>
         @foreach($prestaciones as $prestacion)
           <option value="{{$prestacion['id']}}">{{$prestacion['nombre']}}</option>
         @endforeach
@@ -54,9 +59,9 @@
     <label>Edad</label>
     <div>
     <label>desde</label>
-    <input type="text" class="form-control" name="edad_desde" value="{{$plan->edad_desde}}">
+    <input type="text" class="form-control" name="edad_desde" value="{{$plan->edad_desde}}" required>
     <label>hasta</label>
-    <input type="text" class="form-control" name="edad_hasta" value="{{$plan->edad_hasta}}">
+    <input type="text" class="form-control" name="edad_hasta" value="{{$plan->edad_hasta}}" required>
 </div>
   </div>
   <hr>
@@ -80,3 +85,12 @@
 </html>
 
 @endsection
+
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

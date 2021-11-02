@@ -35,10 +35,9 @@ class BenefitController extends Controller
             $benefit = new Prestacion ();
             $benefit->nombre= $request->nombre;
             $benefit->save();
-            return redirect()->route('benefits.show');
+            return redirect()->route('benefits.show')->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 
@@ -48,6 +47,6 @@ class BenefitController extends Controller
         $benefit->destroy($benefit->id);
         $benefit->save();
 
-        return redirect()->route('benefits.show');
+        return redirect()->route('benefits.show')->with('mensaje','Eliminado exitosamente');
     }
 }

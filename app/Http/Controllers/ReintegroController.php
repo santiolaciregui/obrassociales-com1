@@ -6,6 +6,7 @@ use App\Models\Reintegro;
 use App\Models\Cliente;
 use App\Models\Plan;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -49,6 +50,7 @@ class ReintegroController extends Controller
             'importe'=> 'required'
         ]);
 
+        try{
         $cliente = Cliente::where('email', Auth::user()->email)->get()[0];
         $reintegro = new Reintegro();
         $reintegro->id_cliente = $cliente->id;
@@ -57,9 +59,13 @@ class ReintegroController extends Controller
         $reintegro->fecha_emision = date(Carbon::parse($request->fecha_emision)->format('Y-m-d'));
         $reintegro->nombre_profesional = $request->profesional;
         $reintegro->importe_facturado = $request->importe;
+        $reintegro->estado = 'PENDIENTE';
         $reintegro->save();
-
-        return redirect()->route('welcome');
+        return redirect()->route('reintegros.list')->with('mensaje','Cargado exitosamente');
+        }
+        catch(Exception $e){
+            return redirect()->back()->with('error',$e->getMessage());
+        }
     }
 
 
@@ -91,11 +97,14 @@ class ReintegroController extends Controller
 
     public function patch($id, $estado)
     {
+    try{
         $solicitud = Reintegro::findOrFail($id);
         $solicitud->estado = $estado;
         $solicitud->save();
-
         return redirect()->route('reintegros.list');
+    } catch (Exception $e) {
+        return redirect()->back()->with('error',$e->getMessage());
+    }
     }
 
     /**

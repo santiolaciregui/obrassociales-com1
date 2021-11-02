@@ -70,13 +70,9 @@ class ClienteController extends Controller
             $usuario->password=bcrypt($request->get('contraseña'));
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
-            
-
-            return redirect()->route('welcome');
+            return redirect()->route('client.create')->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
-            return redirect()->back();
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 
@@ -127,10 +123,9 @@ class ClienteController extends Controller
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->route('welcome');
+            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            return redirect()->back();
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 
@@ -151,11 +146,9 @@ class ClienteController extends Controller
             $cliente = Cliente::findOrFail($request->id);
             $cliente->plan_id= $request->plan;
             $cliente->save();
-            return redirect()->route('welcome');
+            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
-            return redirect()->back();
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 }

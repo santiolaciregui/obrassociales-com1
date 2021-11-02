@@ -58,10 +58,9 @@ class FamilyController extends Controller
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
 
-            return redirect()->route('welcome');
+            return redirect()->back()->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 
@@ -108,10 +107,9 @@ class FamilyController extends Controller
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->route('welcome');
+            return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 
@@ -152,11 +150,9 @@ class FamilyController extends Controller
             $familiar = Cliente::findOrFail($request->id);
             $familiar->plan_id= $request->plan;
             $familiar->save();
-            return redirect()->to($request->urlBack);
+            return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
-            echo($e);
-            printf($e);
-            return redirect()->back();
+            return redirect()->back()->with('error',$e->getMessage());
         }
     }
 }

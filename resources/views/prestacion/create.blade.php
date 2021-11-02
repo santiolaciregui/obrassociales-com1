@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 @extends('layouts.main')
 @section('contenedor')
+@if(session()->has('error'))
+    <div class="alert alert-danger">
+        {{ session()->get('error') }}
+    </div>
+@endif
     <html>
     <h2>Solicitar aprobación de prestación</h2>
     <form action="{{route('prestacion.store')}}" method="POST" enctype="multipart/form-data">
@@ -30,7 +35,7 @@
         </div>
         <div>
             <label>Autorización</label>
-            <input type="file" class="form-control" name="autorizacion" accept="image/jpeg image/jpg">
+            <input type="file" class="form-control" name="autorizacion" accept="image/jpeg image/jpg" required>
             @error('autorización')
             <small>*{{$message}}</small>
             @enderror
@@ -43,3 +48,11 @@
 
     </html>
 @endsection
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>

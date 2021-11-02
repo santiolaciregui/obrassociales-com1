@@ -7,6 +7,7 @@ use App\Models\Plan;
 use App\Models\Prestacion;
 use App\Models\SolicitudPrestacion;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,14 +24,23 @@ class PrestacionController extends Controller
 
     public function store(Request $request)
     {
-        $file = $request->file('autorizacion');
-        $image = base64_encode(file_get_contents($file));
-        $id = Cliente::where('email', Auth::user()->email)->get()[0]->id;
-        DB::table('solicitud_prestaciones')->insert([
-            'id_cliente' => $id,
-            'image' => $image
-        ]);
-        return redirect()->route('welcome');
+       try {
+            if ($request->hasFile('autorizacion')) {
+                $file = $request->file('autorizacion');
+                $image = base64_encode(file_get_contents($file));
+                $id = Cliente::where('email', Auth::user()->email)->get()[0]->id;
+                DB::table('solicitud_prestaciones')->insert([
+                    'id_cliente' => $id,
+                    'image' => $image,
+                    'estado' => 'PENDIENTE'
+                ]);
+                return redirect()->route('prestaciones.list')->with('mensaje','Cargado exitosamente');
+            } else {
+                return redirect()->back()->with('error', 'No se selecciono una imagen');
+            }
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
     public function listSolicitudesPrestaciones()
@@ -64,10 +74,15 @@ class PrestacionController extends Controller
 
     public function patch($id, $estado)
     {
+        try{
         $solicitud = SolicitudPrestacion::findOrFail($id);
         $solicitud->estado = $estado;
         $solicitud->save();
 
-        return redirect()->route('prestaciones.list');
+        return redirect()->route('prestaciones.list')->with('mensaje','Actualizado exitosamente');
+
+    } catch (Exception $e) {
+        return redirect()->back()->with('error', $e->getMessage());
+    }
     }
 }

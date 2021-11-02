@@ -3,6 +3,12 @@
 @if(Session::has('error'))
   <div class="alert alert-danger">{{ Session::get('error') }}</div>
   @endif
+
+  @if(session()->has('mensaje'))
+    <div class="alert alert-success">
+        {{ session()->get('mensaje') }}
+    </div>
+@endif
 <html style="text-align-last: center">
 <div class="btn-group" role="group" aria-label="Basic outlined example" >
     @if(Auth::user()->hasRole('administrador'))

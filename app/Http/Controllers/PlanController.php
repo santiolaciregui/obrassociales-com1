@@ -52,11 +52,9 @@ class PlanController extends Controller
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
-        return redirect()->route('welcome');
-    } catch (Exception $e){
-        echo($e);
-        printf($e);
-        return redirect()->back();
+        return redirect()->back()->with('mensaje','Cargado exitosamente');
+    }   catch (Exception $e) {
+        return redirect()->back()->with('error',$e->getMessage());
     }
     }
 
@@ -86,6 +84,7 @@ class PlanController extends Controller
             'edad_hasta'=> 'required',
             'beneficiario'=> 'required',
         ]);
+        try{
         $plan = Plan::findOrFail($request->id);
         $plan->nombre=$request->nombre;
         $plan->tipo=$request->tipo;
@@ -95,7 +94,10 @@ class PlanController extends Controller
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
-        return redirect()->route('welcome');
+        return redirect()->back()->with('mensaje','Cargado exitosamente');
+    } catch (Exception $e) {
+        return redirect()->back()->with('error',$e->getMessage());
+    }
     }
 
     function delete($id) {

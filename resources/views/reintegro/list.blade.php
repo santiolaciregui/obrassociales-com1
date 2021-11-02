@@ -12,7 +12,11 @@ table{
     }
   }
 </style>
-
+@if(session()->has('mensaje'))
+    <div class="alert alert-success">
+        {{ session()->get('mensaje') }}
+    </div>
+@endif
 <html>
 <div class=container>
     <table class="table align-middle">
@@ -44,3 +48,11 @@ table{
 </div>
 </html>
 @endsection
+
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function() {
+      $(this).remove();
+    });
+  }, 2000);
+</script>
