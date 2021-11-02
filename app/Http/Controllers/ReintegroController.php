@@ -61,7 +61,7 @@ class ReintegroController extends Controller
         $reintegro->importe_facturado = $request->importe;
         $reintegro->estado = 'PENDIENTE';
         $reintegro->save();
-        return redirect()->route('reintegros.list')->with('mensaje','Cargado exitosamente');
+        return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
         }
         catch(Exception $e){
             return redirect()->back()->with('error',$e->getMessage());
@@ -101,7 +101,7 @@ class ReintegroController extends Controller
         $solicitud = Reintegro::findOrFail($id);
         $solicitud->estado = $estado;
         $solicitud->save();
-        return redirect()->route('reintegros.list');
+        return redirect()->route('reintegros.list')->with('mensaje','Actualizado exitosamente');
     } catch (Exception $e) {
         return redirect()->back()->with('error',$e->getMessage());
     }

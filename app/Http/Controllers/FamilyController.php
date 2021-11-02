@@ -150,7 +150,7 @@ class FamilyController extends Controller
             $familiar = Cliente::findOrFail($request->id);
             $familiar->plan_id= $request->plan;
             $familiar->save();
-            return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
+            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }
