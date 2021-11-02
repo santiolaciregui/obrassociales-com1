@@ -34,7 +34,7 @@ class PrestacionController extends Controller
                     'image' => $image,
                     'estado' => 'PENDIENTE'
                 ]);
-                return redirect()->route('prestaciones.list')->with('mensaje','Cargado exitosamente');
+                return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
             } else {
                 return redirect()->back()->with('error', 'No se selecciono una imagen');
             }
