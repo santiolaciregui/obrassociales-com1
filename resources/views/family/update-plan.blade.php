@@ -47,6 +47,9 @@
   <td>
     <button type="submit" class="btn btn-dark">Finalizar modificacion de datos</button>
   </td>
+  <td>
+  <a href="javascript: history.go(-1)" class="btn btn-secondary">Regresar</a>
+  </td>
 </form>
 
 </html>

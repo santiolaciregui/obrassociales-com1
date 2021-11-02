@@ -66,7 +66,7 @@ class FamilyController extends Controller
 
     public function update($id){
         $familiar = Cliente::findOrFail($id);
-        return view('family.update')
+        return view('familiar.update')
         ->with('cliente', $familiar);
     }
 
@@ -107,7 +107,7 @@ class FamilyController extends Controller
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
+            return redirect()->route('family.list', ['id_titular' => $familiar ->id_titular])->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }
@@ -150,7 +150,7 @@ class FamilyController extends Controller
             $familiar = Cliente::findOrFail($request->id);
             $familiar->plan_id= $request->plan;
             $familiar->save();
-            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
+            return redirect()->route('family.list',['id_titular' => $familiar ->id_titular])->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }

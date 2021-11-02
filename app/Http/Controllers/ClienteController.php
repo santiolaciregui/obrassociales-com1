@@ -123,7 +123,7 @@ class ClienteController extends Controller
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
+            return redirect()->to('/client-management')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }
@@ -146,7 +146,7 @@ class ClienteController extends Controller
             $cliente = Cliente::findOrFail($request->id);
             $cliente->plan_id= $request->plan;
             $cliente->save();
-            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
+            return redirect()->route('/client-management')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }

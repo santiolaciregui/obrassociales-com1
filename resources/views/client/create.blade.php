@@ -132,6 +132,9 @@
   <td>
     <button type="submit" class="btn btn-dark">Finalizar carga de cliente</button>
   </td>
+  <td>
+    <a href="/client-management" class="btn btn-secondary">Regresar</a>
+  </td>
 </form>
 
 </html>

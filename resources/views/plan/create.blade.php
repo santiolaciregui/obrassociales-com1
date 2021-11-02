@@ -82,6 +82,9 @@
     <td>
       <button type="submit" class="btn btn-dark">Agregar</button>
     </td>
+    <td>
+      <a href="/plan-management" class="btn btn-secondary">Regresar</a>
+    </td>
   </form>
 </body>
 

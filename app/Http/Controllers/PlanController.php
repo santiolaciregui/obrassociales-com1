@@ -94,7 +94,7 @@ class PlanController extends Controller
         $plan->save();
         $prestacion = Prestacion::find($request->prestaciones);
         $plan->prestacion()->sync($prestacion);
-        return redirect()->back()->with('mensaje','Cargado exitosamente');
+        return redirect()->to('/plan-management')->with('mensaje','Actualizado exitosamente');
     } catch (Exception $e) {
         return redirect()->back()->with('error',$e->getMessage());
     }

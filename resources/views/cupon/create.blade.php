@@ -31,6 +31,9 @@
     <td>
         <button type="submit" class="btn btn-dark">Generar cupon</button>
     </td>
+    <td>
+        <a href="welcome" class="btn btn-secondary">Regresar</a>
+    </td>
     </form>
 
     </html>

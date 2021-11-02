@@ -80,6 +80,9 @@
   <td>
     <button type="submit" class="btn btn-dark">Agregar</button>
   </td>
+  <td>
+  <a href="javascript: history.go(-1)" class="btn btn-secondary">Regresar</a>
+  </td>
 </form>
 </body>
 </html>

@@ -117,7 +117,7 @@
     <button type="submit" class="btn btn-dark">Finalizar y crear</button>
   </td>
   <td>
-  <a href="/client-management/{{$id_titular}}/family" class="btn btn-light">Regresar</a>
+    <a href="/client-management/{{$id_titular}}/family" class="btn btn-light">Regresar</a>
   </td>
 </form>
 
