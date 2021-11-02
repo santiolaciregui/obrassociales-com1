@@ -43,8 +43,13 @@ class PrestacionController extends Controller
     public function update($id)
     {
         $solicitud = SolicitudPrestacion::findOrFail($id);
+
+        
+        $cliente = Cliente::findOrFail($id);
+        $nombre_cliente = $cliente->nombre;
+
         return view('prestacion.update')
-            ->with('solicitud', $solicitud);
+            ->with('solicitud', $solicitud)->with('nombre_cliente', $nombre_cliente);
     }
 
     public function patch($id, $estado)

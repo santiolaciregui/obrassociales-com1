@@ -71,8 +71,12 @@ class ReintegroController extends Controller
     public function update($id)
     {
         $solicitud = Reintegro::findOrFail($id);
+        
+        $cliente = Cliente::findOrFail($id);
+        $nombre_cliente = $cliente->nombre;
+        
         return view('reintegro.update')
-            ->with('solicitud', $solicitud);
+            ->with('solicitud', $solicitud)->with('nombre_cliente', $nombre_cliente);
     }
 
     public function patch($id, $estado)
