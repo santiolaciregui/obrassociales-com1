@@ -62,19 +62,29 @@ class ReintegroController extends Controller
         return redirect()->route('welcome');
     }
 
-    
+
     public function listReintegros() {
         $reintegros = Reintegro::orderBy('fecha_solicitud','desc')->get();;
-        return view('reintegro.list')->with('reintegros',$reintegros);
+        $res = [];
+        foreach ($reintegros as $reintegro) {
+            $client = Cliente::findOrFail($reintegro->id_cliente);
+            if ($client) {
+                if (!array_key_exists($client->nombre . " " . $client->apellido, $res))
+                    $res[$client->nombre . " " . $client->apellido] = [$reintegro];
+                else
+                    array_push($res[$client->nombre . " " . $client->apellido], $reintegro);
+            }
+        }
+        return view('reintegro.list')->with('reintegros', $res);
     }
 
     public function update($id)
     {
         $solicitud = Reintegro::findOrFail($id);
-        
+
         $cliente = Cliente::findOrFail($id);
         $nombre_cliente = $cliente->nombre;
-        
+
         return view('reintegro.update')
             ->with('solicitud', $solicitud)->with('nombre_cliente', $nombre_cliente);
     }

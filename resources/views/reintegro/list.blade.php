@@ -26,16 +26,18 @@ table{
             </tr>
         </thead>
         <tbody>
-            @foreach($reintegros as $reintegro)
-            <tr>
-                <td>{{$reintegro['id_cliente']}}</td>
-                <td>{{$reintegro['nombre_profesional']}}</td>
-                <td>{{$reintegro['fecha_solicitud']}}</td>
-                <td>{{$reintegro['estado']}}</td>
-                <td>
-                <a href="{{route('reintegro.update', ['id' => $reintegro->id])}}" class="btn btn-light">Ver</a>
-                </td>
-            </tr>
+            @foreach(array_keys($reintegros) as $cliente)
+                @foreach($reintegros[$cliente] as $reintegro)
+                    <tr>
+                        <td>{{$cliente}}</td>
+                        <td>{{$reintegro['nombre_profesional']}}</td>
+                        <td>{{$reintegro['fecha_solicitud']}}</td>
+                        <td>{{$reintegro['estado']}}</td>
+                        <td>
+                            <a href="{{route('reintegro.update', ['id' => $reintegro->id])}}" class="btn btn-light">Ver</a>
+                        </td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>

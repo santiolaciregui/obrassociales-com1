@@ -25,15 +25,17 @@ table{
             </tr>
         </thead>
         <tbody>
-            @foreach($solicitudes as $solicitud)
-            <tr>
-                <td>{{$solicitud['id_cliente']}}</td>
-                <td>{{$solicitud['created_at']}}</td>
-                <td>{{$solicitud['estado']}}</td>
-                <td>
-                <a href="{{route('prestacion.update', ['id' => $solicitud->id])}}" class="btn btn-light">Ver</a>
-                </td>
-            </tr>
+            @foreach(array_keys($solicitudes) as $cliente)
+                @foreach($solicitudes[$cliente] as $solicitud)
+                    <tr>
+                        <td>{{$cliente}}</td>
+                        <td>{{$solicitud['created_at']}}</td>
+                        <td>{{$solicitud['estado']}}</td>
+                        <td>
+                            <a href="{{route('prestacion.update', ['id' => $solicitud->id])}}" class="btn btn-light">Ver</a>
+                        </td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>

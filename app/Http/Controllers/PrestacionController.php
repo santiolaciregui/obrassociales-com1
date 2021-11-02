@@ -37,14 +37,24 @@ class PrestacionController extends Controller
     {
         $pendiente = 'PENDIENTE';
         $solicitudes = SolicitudPrestacion::orderBy('created_at', 'desc')->get();
-        return view('prestacion.list')->with('solicitudes', $solicitudes);
+        $res = [];
+        foreach ($solicitudes as $solicitud) {
+            $client = Cliente::findOrFail($solicitud->id_cliente);
+            if ($client) {
+                if (!array_key_exists($client->nombre . " " . $client->apellido, $res))
+                    $res[$client->nombre. " " .$client->apellido] = [$solicitud];
+                else
+                    array_push($res[$client->nombre . " " . $client->apellido], $solicitud);
+            }
+        }
+        return view('prestacion.list')->with('solicitudes', $res);
     }
 
     public function update($id)
     {
         $solicitud = SolicitudPrestacion::findOrFail($id);
 
-        
+
         $cliente = Cliente::findOrFail($id);
         $nombre_cliente = $cliente->nombre;
 
