@@ -70,12 +70,6 @@ Route::middleware(['cliente'])->group(function () {
     Route::get('/cupon/create', [CuponDePagoController::class, 'create'])->name('cupon.create');
     Route::post('/cupon-store', [CuponDePagoController::class, 'store'])->name('cupon.store');
     Route::get('/cupon-download/{forma}', [CuponDePagoController::class, 'downloadPDF'])->name('cupon.download');
-
-    Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
-    Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
-
-    Route::get('/prestacion/create', [PrestacionController::class, 'create'])->name('prestacion.create');
-    Route::post('/prestacion-store', [PrestacionController::class, 'store'])->name('prestacion.store');
 });
 
 Route::middleware(['empleadoOcliente'])->group(function () {
@@ -92,4 +86,11 @@ Route::middleware(['empleadoOcliente'])->group(function () {
     Route::patch('/client-patch-plan', [ClienteController::class, 'patch_plan'])->name('client.patch_plan');
 });
 
+Route::middleware(['titularOfamiliar'])->group(function () {
+    Route::get('/reintegro/create', [ReintegroController::class, 'create'])->name('reintegro.create');
+    Route::post('/reintegro-store', [ReintegroController::class, 'store'])->name('reintegro.store');
+
+    Route::get('/prestacion/create', [PrestacionController::class, 'create'])->name('prestacion.create');
+    Route::post('/prestacion-store', [PrestacionController::class, 'store'])->name('prestacion.store');
+});
 require __DIR__ . '/auth.php';
