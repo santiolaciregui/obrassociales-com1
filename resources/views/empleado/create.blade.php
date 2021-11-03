@@ -48,7 +48,7 @@
     <button type="submit" class="btn btn-dark">Finalizar carga de empleado</button>
   </td>
   <td>
-    <a href="/client-management" class="btn btn-secondary">Regresar</a>
+    <a href="{{route('welcome')}}" class="btn btn-secondary">Regresar</a>
   </td>
 </form>
 

@@ -17,7 +17,7 @@ class PlanesSeeder extends Seeder
         $planA = new Plan();
         $planA->nombre = 'Plan A';
         $planA->tipo = 'A';
-        $planA->costo = 133;
+        $planA->costo = 5030;
         $planA->edad_desde = '0';
         $planA->edad_hasta = '18';
         $planA->beneficiario = 'Familiar';
@@ -35,7 +35,7 @@ class PlanesSeeder extends Seeder
         $planC = new Plan();
         $planC->nombre = 'Plan C';
         $planC->tipo = 'C';
-        $planC->costo = 0;
+        $planC->costo = 10002;
         $planC->edad_desde = '60';
         $planC->edad_hasta = '120';
         $planC->beneficiario = 'Pareja';
