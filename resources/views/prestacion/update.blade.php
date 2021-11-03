@@ -13,7 +13,7 @@
   <li>Nombre del cliente: {{$nombre_cliente}}</li>
   <li>Fecha de solicitud: {{$solicitud->created_at}}</li>
   <li>Estado: {{$solicitud->estado}}</li>
-  <li>imagen: {{$solicitud->image}}</li>
+  <img src= 'data:image/jpeg;base64,{{$solicitud->image}}'/>
 </ul>
 @if($solicitud->estado == 'PENDIENTE')
 <div>

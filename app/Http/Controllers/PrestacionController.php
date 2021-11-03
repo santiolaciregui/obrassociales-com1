@@ -29,11 +29,12 @@ class PrestacionController extends Controller
                 $file = $request->file('autorizacion');
                 $image = base64_encode(file_get_contents($file));
                 $id = Cliente::where('email', Auth::user()->email)->get()[0]->id;
-                DB::table('solicitud_prestaciones')->insert([
-                    'id_cliente' => $id,
-                    'image' => $image,
-                    'estado' => 'PENDIENTE'
-                ]);
+                $solicitud = new SolicitudPrestacion();
+                $solicitud -> id_cliente = $id;
+                $solicitud -> image = $image;
+                $solicitud -> estado = 'PENDIENTE';
+                $solicitud->save();
+
                 return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
             } else {
                 return redirect()->back()->with('error', 'No se selecciono una imagen');
@@ -45,7 +46,6 @@ class PrestacionController extends Controller
 
     public function listSolicitudesPrestaciones()
     {
-        $pendiente = 'PENDIENTE';
         $solicitudes = SolicitudPrestacion::orderBy('created_at', 'desc')->get();
         $res = [];
         foreach ($solicitudes as $solicitud) {
@@ -63,9 +63,7 @@ class PrestacionController extends Controller
     public function update($id)
     {
         $solicitud = SolicitudPrestacion::findOrFail($id);
-
-
-        $cliente = Cliente::findOrFail($id);
+        $cliente = Cliente::findOrFail($solicitud->id_cliente);
         $nombre_cliente = $cliente->nombre;
 
         return view('prestacion.update')
