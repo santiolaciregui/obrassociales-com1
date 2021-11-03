@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
-use App\Models\Cliente as ModelsCliente;
 
-class empleadoOfamiliarOCliente
+class EmpleadoOfamiliarOCliente
 {
     /**
      * Handle an incoming request.
