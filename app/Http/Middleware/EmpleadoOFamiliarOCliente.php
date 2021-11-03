@@ -6,7 +6,7 @@ use Closure;
 use App\Models\Role;
 use Illuminate\Http\Request;
 
-class EmpleadoOfamiliarOCliente
+class EmpleadoOFamiliarOCliente
 {
     /**
      * Handle an incoming request.
