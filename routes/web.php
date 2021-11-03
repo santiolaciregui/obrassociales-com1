@@ -7,6 +7,7 @@ use App\Http\Controllers\CuponDePagoController;
 use App\Http\Controllers\ReintegroController;
 use App\Http\Controllers\BenefitController;
 use App\Http\Controllers\PrestacionController;
+use App\Http\Controllers\EmpleadoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,6 +33,9 @@ Route::middleware(['administrador'])->group(function () {
     Route::get('/plan-management/update/{id}', [PlanController::class, 'update'])->name('plan.update');
     Route::patch('/plan-patch', [PlanController::class, 'patch'])->name('plan.patch');
     Route::get('/plan/delete/{id_plan}', [PlanController::class, 'delete'])->name('plan.delete');
+
+    Route::get('/empleado-management/create', [EmpleadoController::class, 'create'])->name('empleado.create');
+    Route::post('/empleado-store', [EmpleadoController::class, 'store'])->name('empleado.store');
 
     Route::get('/benefits', [BenefitController::class, 'show'])->name('benefits.show');
     Route::get('/benefits/add', [BenefitController::class, 'create'])->name('benefit.create');
