@@ -66,7 +66,7 @@ class FamilyController extends Controller
 
     public function update($id){
         $familiar = Cliente::findOrFail($id);
-        return view('familiar.update')
+        return view('family.update')
         ->with('cliente', $familiar);
     }
 

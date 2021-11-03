@@ -7,7 +7,7 @@ use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\Cliente as ModelsCliente;
 
-class EmpleadoOFamiliar
+class empleadoOfamiliarOCliente
 {
     /**
      * Handle an incoming request.
@@ -21,13 +21,9 @@ class EmpleadoOFamiliar
         if (auth()->user() != null) {
             if (auth()->user()->role_id == Role::EMPLEADO) {
                 return $next($request);
-            }
-            else
+            } else
             if (auth()->user()->role_id == Role::CLIENTE) {
-                $cliente = ModelsCliente::where('email', auth()->user()->email)->get()[0];
-                if ($cliente->id != $cliente->id_titular) {
-                    return $next($request);
-                }
+                return $next($request);
             } else
                 return redirect()->route('welcome')->with('error', 'Permiso denegado');
         } else
