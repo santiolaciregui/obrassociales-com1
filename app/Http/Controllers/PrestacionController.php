@@ -67,7 +67,7 @@ class PrestacionController extends Controller
         $nombre_cliente = $cliente->nombre;
 
         return view('prestacion.update')
-            ->with('solicitud', $solicitud)->with('nombre_cliente', $nombre_cliente);
+            ->with('solicitud', $solicitud) -> with('nombre_cliente', $nombre_cliente);
     }
 
     public function patch($id, $estado)
