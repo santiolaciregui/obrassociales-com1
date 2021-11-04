@@ -56,7 +56,7 @@ class ClienteController extends Controller
             $cliente->telefono= $request->telefono;
             $cliente->plan_id= $request->plan;
             $cliente->email= $request->email;
-            $cliente->password=bcrypt($request->get('contraseña'));
+            $cliente->password=Hash::make($request->contraseña);
             $cliente->role_id=Role::CLIENTE;
             $cliente->id_titular= '99';
             $cliente->save();
@@ -67,7 +67,7 @@ class ClienteController extends Controller
             $usuario->nombre= $request->nombre;
             $usuario->apellido= $request->apellido;
             $usuario->email= $request->email;
-            $usuario->password=bcrypt($request->get('contraseña'));
+            $usuario->password=Hash::make($request->contraseña);
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
             return redirect()->route('client.create')->with('mensaje','Cargado exitosamente');
@@ -103,8 +103,8 @@ class ClienteController extends Controller
         ]);
         try {
             $cliente = Cliente::findOrFail($request->id);
-            $passwordViejaHash=Hash::make($request->contraseña);
-            if($cliente->password == $passwordViejaHash){
+            $user = User::where('email', $cliente->email);
+            if(password_verify($request->contraseña, $cliente->password)){
                 $cliente->dni= $request->dni;
                 $cliente->nombre= $request->nombre;
                 $cliente->apellido= $request->apellido;
@@ -119,11 +119,17 @@ class ClienteController extends Controller
                 $cliente->password=Hash::make($request->contraseña_nueva);
                 $cliente->role_id=Role::CLIENTE;
                 $cliente->save();
+
+                
+                $user->nombre= $request->nombre;
+                $user->apellido= $request->apellido;
+                $user->email= $request->email;
+                $user->password=Hash::make($request->contraseña_nueva);
             }
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->to('/client-management')->with('mensaje','Actualizado exitosamente');
+            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }
@@ -146,7 +152,7 @@ class ClienteController extends Controller
             $cliente = Cliente::findOrFail($request->id);
             $cliente->plan_id= $request->plan;
             $cliente->save();
-            return redirect()->route('/client-management')->with('mensaje','Actualizado exitosamente');
+            return redirect()->route('welcome')->with('mensaje','Actualizado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }

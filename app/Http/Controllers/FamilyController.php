@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Cliente;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class FamilyController extends Controller
@@ -46,7 +47,7 @@ class FamilyController extends Controller
             $familiar->plan_id= $request->plan;
             $familiar->email= $request->email;
             $familiar->id_titular= $request->id_titular;
-            $familiar->password=bcrypt($request->get('contraseña'));
+            $familiar->password=Hash::make($request->contraseña_nueva);
             $familiar->role_id=Role::CLIENTE;
             $familiar->save();
 
@@ -54,7 +55,7 @@ class FamilyController extends Controller
             $usuario->nombre= $request->nombre;
             $usuario->apellido= $request->apellido;
             $usuario->email= $request->email;
-            $usuario->password=bcrypt($request->get('contraseña'));
+            $usuario->password=Hash::make($request->contraseña_nueva);
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
 
@@ -88,8 +89,8 @@ class FamilyController extends Controller
         ]);
         try {
             $familiar = Cliente::findOrFail($request->id);
-            $passwordViejaHash=Hash::make($request->contraseña);
-            if($familiar->password == $passwordViejaHash){
+            $user = User::where('email', $familiar->email);
+            if(password_verify($request->contraseña, $familiar->password)){
                 $familiar->dni= $request->dni;
                 $familiar->nombre= $request->nombre;
                 $familiar->apellido= $request->apellido;
@@ -103,11 +104,16 @@ class FamilyController extends Controller
                 $familiar->password=Hash::make($request->contraseña_nueva);
                 $familiar->role_id=Role::CLIENTE;
                 $familiar->save();
+
+                $user->nombre= $request->nombre;
+                $user->apellido= $request->apellido;
+                $user->email= $request->email;
+                $user->password=Hash::make($request->contraseña_nueva);
             }
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
             }
-            return redirect()->route('family.list', ['id_titular' => $familiar ->id_titular])->with('mensaje','Cargado exitosamente');
+            return redirect()->route('welcome')->with('mensaje','Cargado exitosamente');
         } catch (Exception $e) {
             return redirect()->back()->with('error',$e->getMessage());
         }
@@ -127,8 +133,7 @@ class FamilyController extends Controller
 
         // LO IDEAL SERIA QUE YO USE ESTA RUTA, PERO AL USARLA ME TIRA ERROR
         // return redirect()->route('family.list')->with('id_titular', $id_titular)
-        ;
-        return redirect()->route('client.show');
+        return redirect()->route('welcome');
     }
 
     public function update_plan($id){
