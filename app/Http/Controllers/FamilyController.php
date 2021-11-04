@@ -132,8 +132,7 @@ class FamilyController extends Controller
         $familiar->destroy($familiar->id);
         $familiar->save();
 
-        $user->destroy();
-        $user->save();
+        $user->delete();
 
 
         // LO IDEAL SERIA QUE YO USE ESTA RUTA, PERO AL USARLA ME TIRA ERROR
