@@ -128,8 +128,12 @@ class FamilyController extends Controller
     public function delete($id_familiar, $id_titular)
     {
         $familiar = Cliente::findOrFail($id_familiar);
+        $user = User::where('email', $familiar->email);
         $familiar->destroy($familiar->id);
         $familiar->save();
+
+        $user->destroy($user->id);
+        $user->save();
 
 
         // LO IDEAL SERIA QUE YO USE ESTA RUTA, PERO AL USARLA ME TIRA ERROR
