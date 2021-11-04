@@ -132,7 +132,7 @@ class FamilyController extends Controller
         $familiar->destroy($familiar->id);
         $familiar->save();
 
-        $user->destroy($user->id);
+        $user->destroy();
         $user->save();
 
 
