@@ -47,7 +47,7 @@ class FamilyController extends Controller
             $familiar->plan_id= $request->plan;
             $familiar->email= $request->email;
             $familiar->id_titular= $request->id_titular;
-            $familiar->password=Hash::make($request->contraseña_nueva);
+            $familiar->password=Hash::make($request->contraseña);
             $familiar->role_id=Role::CLIENTE;
             $familiar->save();
 
@@ -55,7 +55,7 @@ class FamilyController extends Controller
             $usuario->nombre= $request->nombre;
             $usuario->apellido= $request->apellido;
             $usuario->email= $request->email;
-            $usuario->password=Hash::make($request->contraseña_nueva);
+            $usuario->password=Hash::make($request->contraseña);
             $usuario->role_id=Role::CLIENTE;
             $usuario->save();
 
@@ -109,6 +109,7 @@ class FamilyController extends Controller
                 $user->apellido= $request->apellido;
                 $user->email= $request->email;
                 $user->password=Hash::make($request->contraseña_nueva);
+                $user->save();
             }
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');

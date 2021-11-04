@@ -125,6 +125,7 @@ class ClienteController extends Controller
                 $user->apellido= $request->apellido;
                 $user->email= $request->email;
                 $user->password=Hash::make($request->contraseña_nueva);
+                $user->save();
             }
             else{
                 return redirect()->back()->with('error','La contraseña actual no coincide');
