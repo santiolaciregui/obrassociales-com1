@@ -82,14 +82,12 @@ class FamilyController extends Controller
             'domicilio'=> 'required',
             'estado_civil'=> 'required',
             'email' => 'required',
-            'plan' => 'required',
             'contraseña'=> 'required',
-            'contraseña_nueva'=> 'required',
-            'id_titular'=> 'required'
+            'contraseña_nueva'=> 'required'
         ]);
         try {
             $familiar = Cliente::findOrFail($request->id);
-            $user = User::where('email', $familiar->email);
+            $user = User::where('email', $familiar->email)->get()[0];
             if(password_verify($request->contraseña, $familiar->password)){
                 $familiar->dni= $request->dni;
                 $familiar->nombre= $request->nombre;
@@ -98,9 +96,7 @@ class FamilyController extends Controller
                 $familiar->fecha_nacimiento= $request->fecha_nacimiento;
                 $familiar->domicilio= $request->domicilio;
                 $familiar->estado_civil= $request->estado_civil;
-                $familiar->plan_id= $request->plan;
                 $familiar->email= $request->email;
-                $familiar->id_titular= $request->id_titular;
                 $familiar->password=Hash::make($request->contraseña_nueva);
                 $familiar->role_id=Role::CLIENTE;
                 $familiar->save();

@@ -103,7 +103,7 @@ class ClienteController extends Controller
         ]);
         try {
             $cliente = Cliente::findOrFail($request->id);
-            $user = User::where('email', $cliente->email);
+            $user = User::where('email', $cliente->email)->get()[0];
             if(password_verify($request->contraseña, $cliente->password)){
                 $cliente->dni= $request->dni;
                 $cliente->nombre= $request->nombre;
@@ -120,7 +120,7 @@ class ClienteController extends Controller
                 $cliente->role_id=Role::CLIENTE;
                 $cliente->save();
 
-                
+
                 $user->nombre= $request->nombre;
                 $user->apellido= $request->apellido;
                 $user->email= $request->email;
@@ -143,7 +143,7 @@ class ClienteController extends Controller
         ->with('cliente', $cliente)
         ->with('planes', $planes);
     }
-    
+
     public function patch_plan(Request $request)
     {
         $request->validate([
